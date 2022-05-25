@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS incite_db;
+
+CREATE DATABASE incite_db;
