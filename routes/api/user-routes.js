@@ -1,6 +1,6 @@
 // express.js router
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Post, Votepost } = require('../../models');
 
 // Get /api/users
 router.get('/', (req, res) => {
@@ -16,13 +16,29 @@ router.get('/', (req, res) => {
         })
 });
 
-// GET /api/users/1
+// GET /api/users/:id
 router.get('/:id', (req, res) => {
     User.findOne({
         attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
-        }
+        },
+        include: [
+            // include all the user's posts
+            {
+                model: Post,
+                attributes: ['id', 'title', 'question', 'created_at']
+            },
+            // include the titles of all the posts a user has voted on
+            {
+                // interesting that we use model: Post here first, and then use the through: Votepost
+                model: Post,
+                attributes: ['title'],
+                through: Votepost,
+                as: 'voted_posts'
+            }
+
+        ]
     })
         .then(dbUserData => {
             if (!dbUserData) {
