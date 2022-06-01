@@ -1,7 +1,10 @@
 // import User model
 const User = require('./User');
 const Post = require('./Post');
+const Answer = require('./Answer')
 const Votepost = require('./Votepost');
+const Voteanswer = require('./Voteanswer');
+
 
 // create model associations
 // ONE-TO-MANY relationship
@@ -19,6 +22,7 @@ Post.belongsTo(User, {
     foreignKey: 'user_id',
 })
 
+// BEING VOTEPOST ASSOCIATIONS
 // We need to associate 'User' and 'Post' to one another
 //  - in a way that when we query 'Post', we can see a total of how many votes a user creates
 //  - and when we query 'User' we can see all of the posts they've voted on
@@ -58,6 +62,55 @@ User.hasMany(Votepost, {
 Post.hasMany(Votepost, { 
     foreignKey: 'post_id'
 })
+// END VOTEPOST ASSOCIATIONS
+
+// BEING ANSWER ASSOCIATIONS
+Answer.belongsTo(User, {
+    foreignKey: 'user_id'
+});
+
+Answer.belongsTo(Post, {
+    foreignKey: 'post_id'
+});
+
+User.hasMany(Answer, {
+    foreignKey: 'user_id'
+});
+
+Post.hasMany(Answer, {
+    foreignKey: 'post_id'
+});
+// END ANSWER ASSOCIATIONS
+
+// BEGIN VOTEANSWER ASSOCIATIONS
+User.belongsToMany(Answer, {
+    through: Voteanswer,
+    as: 'voted_answer',
+    foreignKey: 'user_id'
+});
+
+Answer.belongsToMany(User, {
+    through: Voteanswer,
+    as: 'voted_answer',
+    foreignKey: 'answer_id'
+})
+
+// link 'Answer' and 'Voteanswer' so we can see the total number of votes on an answer
+Voteanswer.belongsTo(User, {
+    foreignKey: 'user_id'
+});
+
+Voteanswer.belongsTo(Answer, {
+    foreignKey: 'answer_id'
+});
+
+User.hasMany(Voteanswer, {
+    foreignKey: 'user_id'
+});
+
+Answer.hasMany(Voteanswer, {
+    foreignKey: 'answer_id'
+})
 
 // export models
-module.exports = { User, Post, Votepost };
+module.exports = { User, Post, Votepost, Answer, Voteanswer };

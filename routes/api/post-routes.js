@@ -1,7 +1,7 @@
 const router = require('express').Router();
 // Why did we include the 'User' as well?
 //  - in a query to the 'post' table, we would like to retrieve not only information about each post, but also the user that posted it
-const { Post, User, Votepost } = require('../../models');
+const { Post, User, Votepost, Answer } = require('../../models');
 // in order to the upvote route so that when we vote on a post
 //  - we receive the post's updated info
 //  - we have to call on special Sequelize functionality  'sequelize.literal' so we hae to inpirt sequelize here
@@ -20,9 +20,24 @@ router.get('/', (req, res) => {
         ],
         // get posts in descending order (newest first)
         // notice 'order' is a nested array
-        order: [['created_at', 'DESC']],
+        order: [[sequelize.literal('`vote_count` DESC')]],
         // 'include' is how we make a 'JOIN' in sequelize
         include: [
+            // include the Answer model
+            {
+                model: Answer,
+                attributes: [
+                    'id', 
+                    'answer_text', 
+                    'post_id', 
+                    'user_id', 
+                    'created_at'
+                ],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
             {
                 model: User,
                 attributes: ['username']
@@ -50,6 +65,20 @@ router.get('/:id', (req, res) => {
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'), 'vote_count']
         ],
         include: [
+            {
+                model: Answer,
+                attributes: [
+                    'id', 
+                    'answer_text', 
+                    'post_id', 
+                    'user_id', 
+                    'created_at'
+                ],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
             {
                 model: User,
                 attributes: ['username']
