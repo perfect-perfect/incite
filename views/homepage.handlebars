@@ -1,0 +1,21 @@
+<ol class="post-list">
+    {{!-- #each is a handlebars helper that allows us to loop through arrays --}}
+    {{!-- in this case we are looping through the { posts } object array we created in home-routes.js  --}}
+    {{!-- any HTML code in between will be repeated for every item in 'posts' --}}
+    {{!-- we then declare a variable name 'post' for each object in the array --}}
+    {{#each posts as |post|}}
+    <li>
+        <article class="post">
+            <div class="title">
+                <a href="/post/{{post.id}}" target="blank">{{post.title}}</a>
+            </div>
+            <div class="meta">
+                {{post.vote_count}} point(s) by {{post.user.username}} on
+                {{post.created_at}}
+                |
+                <a href="/post/{{id}}">{{post.answers.length}} answer(s)</a>
+            </div>
+        </article>
+    </li>
+    {{/each}}
+</ol> 
