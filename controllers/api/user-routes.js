@@ -70,7 +70,17 @@ router.post('/', (req, res) => {
         email: req.body.email,
         password: req.body.password
     })
-        .then(dbUserData => res.json(dbUserData))
+        .then(dbUserData => {
+            // creates the express-session/cookie
+            // gives our server easy access to the user's 'user_id', 'username', and a Boolean describing whether or not the user is logged in.
+            req.session.save(() => {
+                req.session.user_id = dbUserData.id;
+                req.session.username = dbUserData.username;
+                req.session.loggedIn = true;
+
+                res.json(dbUserData);
+            })
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -100,9 +110,33 @@ router.post('/login', (req, res) => {
                 return;
             }
 
-            res.json({ user: dbUserData, message: 'You are now logged in!' });
+            req.session.save(() => {
+                // declare session variables
+                // creates the express-session/cookie
+                // gives our server easy access to the user's 'user_id', 'username', and a Boolean describing whether or not the user is logged in.
+                req.session.user_id = dbUserData.id;
+                req.session.username = dbUserData.username;
+                req.session.loggedIn = true;
+
+                res.json({ user: dbUserData, message: 'You are now logged in!' });
+            });
+
         });
 });
+
+// POST logout to /api/users/logout
+router.post('/logout', (req, res) => {
+    // use 'destroy()' method to clear the express-session/cookie if we are logged in
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            // send 204 status code after session has successfully ben destroyed
+            res.status(204).end();
+        });
+    }
+    else {
+        res.status(404).end()
+    }
+})
 
 // PUT /api/users/1
 router.put('/:id', (req, res) => {
