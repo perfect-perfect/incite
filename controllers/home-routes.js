@@ -3,8 +3,9 @@ const sequelize = require('../config/connection');
 const { Post, User, Answer } = require('../models')
 
 router.get('/', (req, res) => {
-    // we use '.render()' to specify which template we want to use
-    // in this case we want 'homepage.handlebars'
+    // console.log the express-session/cookie variables
+    // this console.log shows up in the terminal
+    console.log(req.session);
     Post.findAll({
         attributes: [
             'id',
@@ -47,6 +48,8 @@ router.get('/', (req, res) => {
             //      - that would prevent us from adding other properties to the template later
             //      - we can simpllu add the array to a object '{ posts }'
             //          - to loop over this array we'll have to employ handlebars 'helpers' that can loop thorugh arrays on the homepage
+            // we use '.render()' to specify which template we want to use
+            // in this case we want 'homepage.handlebars'
             res.render('homepage', { posts });
         })
         .catch(err => {
@@ -54,5 +57,16 @@ router.get('/', (req, res) => {
             res.status(500).json(err);
         });
 });
+
+
+router.get('/login', (req, res) => {
+    // check for an express-session/cookie (if you're logged in) if one exists then reroute to the hoepage since you are already logged in
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    // our 'login.handlebars' doesn't need any variables so we don't need to pass a second argument to the 'render()' method
+    res.render('login');
+})
 
 module.exports = router;
