@@ -109,7 +109,7 @@ router.post('/login', (req, res) => {
                 res.status(400).json({ message: 'Incorrect password!' });
                 return;
             }
-
+            // with this authentication working we an finally log in users and then allow them to comment on and upvote posts.
             req.session.save(() => {
                 // declare session variables
                 // creates the express-session/cookie
