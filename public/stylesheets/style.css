@@ -142,20 +142,20 @@ main {
   background-color: #1f9c13;
 }
 
-.comment-form {
+.answer-form {
   margin-bottom: 5%;
 }
 
-.comment {
+.answer {
   padding: 1%;
   margin-bottom: 1%;
 }
 
-.comment:nth-child(odd) {
+.answer:nth-child(odd) {
   background-color: #fff5eb;
 }
 
-.comment .meta {
+.answer .meta {
   font-size: 90%;
   margin-bottom: .5%;
   opacity: .6;

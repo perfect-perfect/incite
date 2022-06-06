@@ -28,16 +28,20 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    Answer.create({
-        answer_text: req.body.answer_text,
-        user_id: req.body.user_id,
-        post_id: req.body.post_id
-    })
-        .then(dbAnswerData => res.json(dbAnswerData))
-        .catch(err => {
-            console.log(err);
-            res.status(400).json(err);
-        });
+    // check the session
+    if (req.session) {
+        Answer.create({
+            answer_text: req.body.answer_text,
+            post_id: req.body.post_id,
+            // use the id from the session
+            user_id: req.session.user_id
+        })
+            .then(dbAnswerData => res.json(dbAnswerData))
+            .catch(err => {
+                console.log(err);
+                res.status(400).json(err);
+            });
+    }
 
 });
 

@@ -120,13 +120,30 @@ router.post('/', (req, res) => {
 //      - uing the 'Votepost' model to create a vote
 //      - querying on that post to get an updated vote count
 router.put('/upvote', (req, res) => {
-    // custom static method created in models/Post.js
-    Post.upvote(req.body, { Votepost })
-        .then(updatedPostData => res.json(updatedPostData))
+    // make sure the session exists first, before even touching the database
+    if (req.session) {
+        // pass session id along with all destructured properties on req.body
+        //  - What are the destructured properties on 'req.body'
+        //      - i believe it is post_id: id from the upvote.js static js file that responds to the clicking of the upvote button
+        // 'upvote()' is a custom static method created in models/Post.js
+        Post.upvote(
+            { 
+                ...req.body,
+                // make sit so the upvote feature wil only work if someone has logged in
+                user_id: req.session.user_id 
+            }, 
+            { 
+                Votepost, 
+                Answer, 
+                User 
+            }
+        )
+        .then(updatedVoteData => res.json(updatedVoteData))
         .catch(err => {
             console.log(err);
-            res.status(400).json(err);
+            res.status(500).json(err);
         });
+    }
 });
 
 // PUT update title /api/posts/:id

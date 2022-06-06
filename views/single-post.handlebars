@@ -1,0 +1,43 @@
+<article class="post">
+    <div class="title">
+        <a href="/post/{{post.id}}" target="_blank">{{post.title}}</a>
+    </div>
+    <div class="meta">
+        {{post.vote_count}} points(s) by {{post.user.username}} on
+        {{post.created_at}}
+        |
+        <a href="/post/{{post.id}}">{{post.answers.length}} answers(s)</a>
+    </div>
+</article>
+{{!-- include the form and answers below --}}
+{{!-- conditionally render answer form, only if there is a session open --}}
+{{#if loggedIn}}
+<form class="answer-form">
+    <div>
+        <textarea name="answer-body"></textarea>
+    </div>
+
+    <div>
+        <button type="submit">add answer</button>
+        <button type="button" class="upvote-btn">upvote</button>
+    </div>
+</form>
+{{/if}}
+
+<div class="answers">
+    {{#each post.answers}}
+    <section class="answer">
+        <div class="meta">
+            {{user.username}} on {{created_at}}
+        </div>
+        <div class="text">
+            {{answer_text}}
+        </div>
+    </section>
+    {{/each}}
+</div>
+
+{{#if loggedIn}}
+<script src="/javascript/answer.js"></script>
+<script src="/javascript/upvote.js"></script>
+{{/if}}
