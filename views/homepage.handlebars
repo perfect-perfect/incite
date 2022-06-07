@@ -5,17 +5,8 @@
     {{!-- we then declare a variable name 'post' for each object in the array --}}
     {{#each posts as |post|}}
     <li>
-        <article class="post">
-            <div class="title">
-                <a href="/post/{{post.id}}" target="blank">{{post.title}}</a>
-            </div>
-            <div class="meta">
-                {{post.vote_count}} point(s) by {{post.user.username}} on
-                {{post.created_at}}
-                |
-                <a href="/post/{{id}}">{{post.answers.length}} answer(s)</a>
-            </div>
-        </article>
+        {{!-- to use a partial we use a '>' followed by the name of the partial file 'post-info' and the object we'll pass to the partial 'post' --}}
+        {{> post-info post }}
     </li>
     {{/each}}
 </ol> 
