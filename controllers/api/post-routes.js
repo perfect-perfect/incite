@@ -6,6 +6,7 @@ const { Post, User, Votepost, Answer } = require('../../models');
 //  - we receive the post's updated info
 //  - we have to call on special Sequelize functionality  'sequelize.literal' so we hae to inpirt sequelize here
 const sequelize = require('../../config/connection');
+const withAuth = require('../../utils/auth');
 
 // GET all posts /api/posts/
 router.get('/', (req, res) => {
@@ -99,12 +100,12 @@ router.get('/:id', (req, res) => {
 });
 
 // POST a post /api/posts/
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     // expects {title: 'How can I X?', question: 'I am trying to X, but I am having some issues with Y', user_id: 1 }
     Post.create({
         title: req.body.title,
         question: req.body.question,
-        user_id: req.body.user_id
+        user_id: req.session.user_id
     })
         .then(dbPostData => res.json(dbPostData))
         .catch(err => {
@@ -119,7 +120,7 @@ router.post('/', (req, res) => {
 //  - it will have two queries
 //      - uing the 'Votepost' model to create a vote
 //      - querying on that post to get an updated vote count
-router.put('/upvote', (req, res) => {
+router.put('/upvote', withAuth, (req, res) => {
     // make sure the session exists first, before even touching the database
     if (req.session) {
         // pass session id along with all destructured properties on req.body
@@ -147,7 +148,7 @@ router.put('/upvote', (req, res) => {
 });
 
 // PUT update title /api/posts/:id
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Post.update(
         {
             title: req.body.title
@@ -171,7 +172,7 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE a post /api/posts/:id
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Post.destroy({
         where: {
             id: req.params.id

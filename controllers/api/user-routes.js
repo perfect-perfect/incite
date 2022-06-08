@@ -1,6 +1,7 @@
 // express.js router
 const router = require('express').Router();
 const { User, Post, Votepost, Answer } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // Get /api/users
 router.get('/', (req, res) => {
@@ -63,7 +64,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/users
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     User.create({
         username: req.body.username,
@@ -125,7 +126,7 @@ router.post('/login', (req, res) => {
 });
 
 // POST logout to /api/users/logout
-router.post('/logout', (req, res) => {
+router.post('/logout', withAuth, (req, res) => {
     // use 'destroy()' method to clear the express-session/cookie if we are logged in
     if (req.session.loggedIn) {
         req.session.destroy(() => {
@@ -139,7 +140,7 @@ router.post('/logout', (req, res) => {
 })
 
 // PUT /api/users/1
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
@@ -163,7 +164,7 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE /api/users/1
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     User.destroy({
         where: {
             id: req.params.id
