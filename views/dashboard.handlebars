@@ -1,0 +1,32 @@
+{{!-- we will access this page through 'dashboard-routes.js' --}}
+<section>
+    <h2>Ask A New Question</h2>
+    <form class="new-post-form">
+        <div>
+            <label for="post-title">Title</label>
+            <input type="text" id="post-title" name="post-title" />
+        </div>
+        <div>
+            <label for="question">Question</label>
+            <input id="question" name="question" />
+        </div>
+        <button type="submit" class="btn">Create</button>
+    </form>
+</section>
+
+{{#if posts.length}}
+<section>
+    <h2>Your Questions</h2>
+    <ol>
+        {{#each posts as |post|}}
+        <li>
+            {{> post-info post}}
+            <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit Question</a>
+        </li>
+        {{/each}}
+    </ol>
+</section>
+{{/if}}
+
+{{!-- gives the handlebars access to the js file that allows us to add posts --}}
+<script src="/javascript/add-post.js"></script>

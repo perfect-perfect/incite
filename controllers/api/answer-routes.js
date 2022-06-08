@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Answer, User, Voteanswer } = require('../../models');
 const sequelize = require('../../config/connection');
+const withAuth = require('../../utils/auth')
 
 router.get('/', (req, res) => {
     Answer.findAll({
@@ -27,22 +28,26 @@ router.get('/', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
-    Answer.create({
-        answer_text: req.body.answer_text,
-        user_id: req.body.user_id,
-        post_id: req.body.post_id
-    })
-        .then(dbAnswerData => res.json(dbAnswerData))
-        .catch(err => {
-            console.log(err);
-            res.status(400).json(err);
-        });
+router.post('/', withAuth, (req, res) => {
+    // check the session
+    if (req.session) {
+        Answer.create({
+            answer_text: req.body.answer_text,
+            post_id: req.body.post_id,
+            // use the id from the session
+            user_id: req.session.user_id
+        })
+            .then(dbAnswerData => res.json(dbAnswerData))
+            .catch(err => {
+                console.log(err);
+                res.status(400).json(err);
+            });
+    }
 
 });
 
 // PUT api/answers/upvote
-router.put('/upvote', (req, res) => {
+router.put('/upvote', withAuth, (req, res) => {
     // use 'Voteanswer' to create a vote
     Voteanswer.create({
         user_id: req.body.user_id,
@@ -75,7 +80,7 @@ router.put('/upvote', (req, res) => {
 });
 
 // DELETE from api/answers/:id
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Answer.destroy({
         where: {
             id: req.params.id

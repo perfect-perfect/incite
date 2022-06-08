@@ -50,7 +50,10 @@ router.get('/', (req, res) => {
             //          - to loop over this array we'll have to employ handlebars 'helpers' that can loop thorugh arrays on the homepage
             // we use '.render()' to specify which template we want to use
             // in this case we want 'homepage.handlebars'
-            res.render('homepage', { posts });
+            res.render('homepage', { 
+                posts ,
+                loggedIn: req.session.loggedIn
+            });
         })
         .catch(err => {
             console.log(err);
@@ -67,6 +70,62 @@ router.get('/login', (req, res) => {
     }
     // our 'login.handlebars' doesn't need any variables so we don't need to pass a second argument to the 'render()' method
     res.render('login');
-})
+});
+
+// HTTPS request is http://localhost:3001/api/post/{{post.id}}
+// nptice that the api is different, it is 'posts'
+router.get('/post/:id', (req, res) => {
+    Post.findOne({
+        where: {
+            id: req.params.id
+        },
+        attributes: [
+            'id',
+            'question',
+            'title',
+            'created_at',
+            [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'), 'vote_count']
+        ],
+        include: [
+            {
+                model: Answer,
+                attributes: [
+                    'id',
+                    'answer_text',
+                    'post_id',
+                    'user_id',
+                    'created_at'
+                ],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    })
+        .then(dbPostData => {
+            if (!dbPostData) {
+                res.status(404).json({ message: 'No post found with this id' });
+                return;
+            }
+
+            // serialize the data
+            const post = dbPostData.get({ plain: true });
+
+            // pass data to template
+            res.render('single-post', { 
+                post,
+                loggedIn: req.session.loggedIn
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
 module.exports = router;

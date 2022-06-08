@@ -5,10 +5,12 @@ const sequelize = require('./config/connection');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const path = require('path');
+const helpers = require('./utils/helpers')
 
 // set up handlebars as template engine
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({});
+// we're letting handlebars know about the helpers file
+const hbs = exphbs.create({ helpers });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
