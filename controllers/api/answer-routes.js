@@ -9,9 +9,9 @@ router.get('/', (req, res) => {
             'id',
             'answer_text',
             'created_at',
-            [
-                sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count'
-            ]
+            // [
+            //     sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count'
+            // ]
         ],
         // want to add order here and order by vote_count
         include: [
@@ -47,11 +47,11 @@ router.post('/', withAuth, (req, res) => {
 });
 
 // PUT api/answers/upvote
-router.put('/upvote', withAuth, (req, res) => {
+router.put('/upvote', (req, res) => {
     // use 'Voteanswer' to create a vote
     Voteanswer.create({
         user_id: req.body.user_id,
-        // post_id: req.body.post_id,
+        post_id: req.body.post_id,
         answer_id: req.body.answer_id
     }).then(() => {
         // find the answer we just voted on
@@ -63,9 +63,9 @@ router.put('/upvote', withAuth, (req, res) => {
                 'id',
                 'answer_text',
                 'created_at',
-                [
-                    sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count'
-                ]
+                // [
+                //     sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count'
+                // ]
             ]
         })
     })

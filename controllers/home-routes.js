@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Post, User, Answer } = require('../models')
+const { Post, User, Answer, Voteanswer } = require('../models')
 
 router.get('/', (req, res) => {
     // console.log the express-session/cookie variables
@@ -24,10 +24,12 @@ router.get('/', (req, res) => {
                     'user_id',
                     'created_at'
                 ],
-                include: {
-                    model: User,
-                    attributes: ['username']
-                }
+                include: [
+                    {
+                        model: User,
+                        attributes: ['username']
+                    }
+                ]
             },
             {
                 model: User,
@@ -99,12 +101,28 @@ router.get('/post/:id', (req, res) => {
                 include: {
                     model: User,
                     attributes: ['username']
+                },
+            },
+            {
+                model: Answer,
+                include: {
+                    model: Voteanswer,
+                    attributes: [
+                        [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE post.id = voteanswer.post_id)'), 'answervote_count']
+                    ]
                 }
             },
             {
                 model: User,
-                attributes: ['username']
-            }
+                attributes: ['username'],
+            },
+            // {
+            //     model: Voteanswer,
+            //     attributes: [
+            //         [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE post.id = voteanswer.post_id)'), 'answervote_count']
+            //     ]
+            // }
+
         ]
     })
         .then(dbPostData => {
@@ -115,7 +133,7 @@ router.get('/post/:id', (req, res) => {
 
             // serialize the data
             const post = dbPostData.get({ plain: true });
-
+            console.log(post);
             // pass data to template
             res.render('single-post', { 
                 post,

@@ -18,14 +18,14 @@ Voteanswer.init(
                 key: 'id'
             }
         },
-        // post_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        //     references: {
-        //         model: 'post',
-        //         key: 'id'
-        //     }
-        // },
+        post_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'post',
+                key: 'id'
+            }
+        },
         answer_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

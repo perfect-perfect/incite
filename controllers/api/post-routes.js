@@ -1,7 +1,7 @@
 const router = require('express').Router();
 // Why did we include the 'User' as well?
 //  - in a query to the 'post' table, we would like to retrieve not only information about each post, but also the user that posted it
-const { Post, User, Votepost, Answer } = require('../../models');
+const { Post, User, Votepost, Answer, Voteanswer } = require('../../models');
 // in order to the upvote route so that when we vote on a post
 //  - we receive the post's updated info
 //  - we have to call on special Sequelize functionality  'sequelize.literal' so we hae to inpirt sequelize here
@@ -78,6 +78,16 @@ router.get('/:id', (req, res) => {
                 include: {
                     model: User,
                     attributes: ['username']
+                },
+
+            },
+            {
+                model: Answer,
+                include: {
+                    model: Voteanswer,
+                    attributes: [
+                        [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE post.id = voteanswer.post_id)'), 'answervote_count']
+                    ]
                 }
             },
             {
