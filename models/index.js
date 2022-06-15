@@ -64,7 +64,7 @@ Post.hasMany(Votepost, {
 })
 // END VOTEPOST ASSOCIATIONS
 
-// BEING ANSWER ASSOCIATIONS
+// BEGIN ANSWER ASSOCIATIONS
 Answer.belongsTo(User, {
     foreignKey: 'user_id'
 });

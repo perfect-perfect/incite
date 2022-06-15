@@ -137,6 +137,7 @@ router.put('/upvote', withAuth, (req, res) => {
         //  - What are the destructured properties on 'req.body'
         //      - i believe it is post_id: id from the upvote.js static js file that responds to the clicking of the upvote button
         // 'upvote()' is a custom static method created in models/Post.js
+        console.log(...req.body)
         Post.upvote(
             { 
                 ...req.body,

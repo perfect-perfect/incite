@@ -5,7 +5,7 @@ const { Post, User, Answer, Voteanswer } = require('../models')
 router.get('/', (req, res) => {
     // console.log the express-session/cookie variables
     // this console.log shows up in the terminal
-    console.log(req.session);
+    // console.log(req.session);
     Post.findAll({
         attributes: [
             'id',
@@ -108,7 +108,13 @@ router.get('/post/:id', (req, res) => {
                 include: {
                     model: Voteanswer,
                     attributes: [
-                        [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE post.id = voteanswer.post_id)'), 'answervote_count']
+                        // [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE post.id = voteanswer.post_id)'), 'answervote_count']
+
+                        // 1st new attempt
+                        // [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count']
+
+                        // 2nd attempt
+                        [sequelize.literal('(SELECT COUNT(*) FROM answer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count']
                     ]
                 }
             },
