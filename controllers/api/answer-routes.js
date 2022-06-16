@@ -49,12 +49,14 @@ router.post('/', withAuth, (req, res) => {
 // PUT api/answers/upvote
 router.put('/upvote', (req, res) => {
     // use 'Voteanswer' to create a vote
+    console.log(req.session);
     Voteanswer.create({
         // using session user id
         user_id: req.session.user_id,
         post_id: req.body.post_id,
         answer_id: req.body.answer_id
     }).then(() => {
+        // console.log(user_id, post_id, answer_id)
         // find the answer we just voted on
         return Answer.findOne({
             where: {

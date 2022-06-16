@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'), 'vote_count']
         ],
+        order: [[sequelize.literal('`vote_count` DESC')]],
         include: [
             {
                 model: Answer,
@@ -96,8 +97,10 @@ router.get('/post/:id', (req, res) => {
                     'answer_text',
                     'post_id',
                     'user_id',
-                    'created_at'
+                    'created_at',
+                    // [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answers.id = voteanswer.answer_id)'),'answervote_count']
                 ],
+                // order: [[sequelize.literal('`answervote_count` DESC')]],
                 include: {
                     model: User,
                     attributes: ['username']
@@ -105,6 +108,9 @@ router.get('/post/:id', (req, res) => {
             },
             {
                 model: Answer,
+                // attributes: [
+                //     [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answers.id = voteanswer.answer_id)'), 'answervote_count']
+                // ]
                 include: {
                     model: Voteanswer,
                     attributes: [
@@ -114,7 +120,7 @@ router.get('/post/:id', (req, res) => {
                         // [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count']
 
                         // 2nd attempt
-                        [sequelize.literal('(SELECT COUNT(*) FROM answer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count']
+                        [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answers.id = voteanswer.answer_id)'), 'answervote_count']
                     ]
                 }
             },
@@ -139,7 +145,7 @@ router.get('/post/:id', (req, res) => {
 
             // serialize the data
             const post = dbPostData.get({ plain: true });
-            console.log(post);
+            // console.log(post);
             // pass data to template
             res.render('single-post', { 
                 post,
