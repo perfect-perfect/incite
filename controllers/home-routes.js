@@ -89,6 +89,7 @@ router.get('/post/:id', (req, res) => {
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'), 'vote_count']
         ],
+        // order: [{model: Post}, {model: Answer}, 'answervote_count', 'desc'],
         include: [
             {
                 model: Answer,
@@ -108,21 +109,21 @@ router.get('/post/:id', (req, res) => {
             },
             {
                 model: Answer,
-                // attributes: [
-                //     [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answers.id = voteanswer.answer_id)'), 'answervote_count']
-                // ]
-                include: {
-                    model: Voteanswer,
-                    attributes: [
-                        // [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE post.id = voteanswer.post_id)'), 'answervote_count']
+                attributes: [
+                    [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answers.id = voteanswer.answer_id)'), 'answervote_count']
+                ]
+                // include: {
+                //     model: Voteanswer,
+                //     attributes: [
+                //         // [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE post.id = voteanswer.post_id)'), 'answervote_count']
 
-                        // 1st new attempt
-                        // [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count']
+                //         // 1st new attempt
+                //         // [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count']
 
-                        // 2nd attempt
-                        [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answers.id = voteanswer.answer_id)'), 'answervote_count']
-                    ]
-                }
+                //         // 2nd attempt
+                //         [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answers.id = voteanswer.answer_id)'), 'answervote_count']
+                //     ]
+                // }
             },
             {
                 model: User,
@@ -135,6 +136,9 @@ router.get('/post/:id', (req, res) => {
             //     ]
             // }
 
+        ],
+        order: [
+            [[sequelize.literal('`answers.answervote_count` DESC')]]
         ]
     })
         .then(dbPostData => {
@@ -145,7 +149,7 @@ router.get('/post/:id', (req, res) => {
 
             // serialize the data
             const post = dbPostData.get({ plain: true });
-            // console.log(post);
+            console.log(post);
             // pass data to template
             res.render('single-post', { 
                 post,

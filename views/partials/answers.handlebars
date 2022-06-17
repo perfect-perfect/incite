@@ -9,7 +9,8 @@
             {{!-- format_date is from the helpers file. we just have to reference the function because we passed the helpers.js file into 'server.js' at the line 'const hbs = exphbs.create({ helpers });' --}}
             {{!-- funcionally this works the same as 'format_date(created_at)' --}}
             {{user.username}} on {{format_date created_at}}
-            {{voteanswers.0.answervote_count}} points
+            {{!-- {{voteanswers.0.answervote_count}} points --}}
+            {{answervote_count}} points
         </div>
         <div class="text">
             {{answer_text}}
