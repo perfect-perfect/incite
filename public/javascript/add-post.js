@@ -4,11 +4,17 @@ async function newFormHandler(event) {
     const title = document.querySelector('input[name="post-title"]').value;
     const question = document.querySelector('input[name="question"]').value;
 
+    const fileElement = document.getElementById('fileInput')
+
+    const file = fileElement.files[0]
+    console.log(file);
+
     const response = await fetch(`/api/posts`, {
         method: 'POST',
         body: JSON.stringify({
             title,
-            question
+            question,
+            file
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -16,7 +22,8 @@ async function newFormHandler(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/dashboard');
+        // document.location.replace('/dashboard');
+        console.log(file)
     } else {
         alert(response.statusText);
     }

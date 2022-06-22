@@ -7,6 +7,14 @@ const PORT = process.env.PORT || 3001;
 const path = require('path');
 const helpers = require('./utils/helpers')
 
+// upload images
+const upload = require('./uploads/multer');
+
+const cloudinary = require('./uploads/cloudinary')
+
+const fs = require('fs');
+
+
 // set up handlebars as template engine
 const exphbs = require('express-handlebars');
 // we're letting handlebars know about the helpers file

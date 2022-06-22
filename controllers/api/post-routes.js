@@ -8,6 +8,14 @@ const { Post, User, Votepost, Answer, Voteanswer } = require('../../models');
 const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
+const upload = require('../../uploads/multer');
+
+const cloudinary = require('../../uploads/cloudinary');
+
+const fs = require('fs');
+
+const path = require('path');
+
 // GET all posts /api/posts/
 router.get('/', (req, res) => {
     console.log('==============');
@@ -110,12 +118,30 @@ router.get('/:id', (req, res) => {
 });
 
 // POST a post /api/posts/
-router.post('/', withAuth, (req, res) => {
+router.post('/', upload.single('image'), (req, res) => {
+
+    const uploader = (path) => cloudinary.uploads(path, 'images')
+
+    // const urls = []
+
+    // const file = req.file
+
+    const newPath = uploader(path);
+
+    console.log(newPath)
+
+    // for (const file of files) {
+    //     const {path} = file
+    //     const newPath = uploader(path)
+
+    //     urls.push(newPath)
+    // }
     // expects {title: 'How can I X?', question: 'I am trying to X, but I am having some issues with Y', user_id: 1 }
     Post.create({
         title: req.body.title,
         question: req.body.question,
-        user_id: req.session.user_id
+        user_id: req.session.user_id,
+        image: newPath
     })
         .then(dbPostData => res.json(dbPostData))
         .catch(err => {

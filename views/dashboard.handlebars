@@ -1,7 +1,7 @@
 {{!-- we will access this page through 'dashboard-routes.js' --}}
 <section>
     <h2>Ask A New Question</h2>
-    <form class="new-post-form">
+    <form class="new-post-form" enctype='multipart/form-data' >
         <div>
             <label for="post-title">Title</label>
             <input type="text" id="post-title" name="post-title" />
@@ -9,6 +9,10 @@
         <div>
             <label for="question">Question</label>
             <input id="question" name="question" />
+        </div>
+        <div>
+            <label for="file">Upload image</label>
+            <input type="file" id="fileInput" name="fileInput">
         </div>
         <button type="submit" class="btn">Create</button>
     </form>
