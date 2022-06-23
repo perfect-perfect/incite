@@ -7,6 +7,8 @@ async function newFormHandler(event) {
     const fileElement = document.getElementById('fileInput')
 
     const file = fileElement.files[0]
+    var fromData = new FormData();
+    formData.append('file', file);
     console.log(file);
 
     const response = await fetch(`/api/posts`, {
