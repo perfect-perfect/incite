@@ -8,6 +8,27 @@ const { Post, User, Votepost, Answer, Voteanswer } = require('../../models');
 const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+require ('dotenv').config();
+const path = require('path');
+const multer = require('multer');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+})
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'Image',
+    }
+});
+
+const upload = multer({ storage: storage });
+
 // GET all posts /api/posts/
 router.get('/', (req, res) => {
     console.log('==============');
@@ -15,7 +36,8 @@ router.get('/', (req, res) => {
         attributes: [
             'id', 
             'title', 
-            'question', 
+            'question',
+            'image', 
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'),'vote_count']
         ],
@@ -61,7 +83,8 @@ router.get('/:id', (req, res) => {
         attributes: [
             'id', 
             'title', 
-            'question', 
+            'question',
+            'image', 
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'), 'vote_count']
         ],
@@ -110,18 +133,23 @@ router.get('/:id', (req, res) => {
 });
 
 // POST a post /api/posts/
-router.post('/', withAuth, (req, res) => {
+router.post('/', withAuth, upload.single('postImage'), (req, res) => {
+    res.redirect('/dashboard')
     // expects {title: 'How can I X?', question: 'I am trying to X, but I am having some issues with Y', user_id: 1 }
     Post.create({
         title: req.body.title,
         question: req.body.question,
-        user_id: req.session.user_id
+        user_id: req.session.user_id,
+        image: req.file.path
     })
-        .then(dbPostData => res.json(dbPostData))
+        // .then(dbPostData => {
+        //     res.json(dbPostData);
+        // })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
+    // res.redirect('/dashboard')
 });
 
 // PUT /api/posts/upvote
