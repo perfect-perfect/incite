@@ -48,10 +48,11 @@ User.init(
                 len: [4]
             }
         },
-        // profileImage: {
-        //     type: DataTypes.STRING,
-        //     defaultValue: "../image/empty-avatar.png"
-        // }
+        // avatar
+        profileImage: {
+            type: DataTypes.STRING,
+            defaultValue: "../image/empty-avatar.png"
+        }
     },
     {
         hooks: {

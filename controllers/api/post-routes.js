@@ -134,7 +134,7 @@ router.get('/:id', (req, res) => {
 
 // POST a post /api/posts/
 router.post('/', withAuth, upload.single('postImage'), (req, res) => {
-    res.redirect('/dashboard')
+    // res.redirect('/dashboard')
     // expects {title: 'How can I X?', question: 'I am trying to X, but I am having some issues with Y', user_id: 1 }
     Post.create({
         title: req.body.title,
@@ -149,7 +149,8 @@ router.post('/', withAuth, upload.single('postImage'), (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
-    // res.redirect('/dashboard')
+    res.redirect('/dashboard');
+    location.reload();
 });
 
 // PUT /api/posts/upvote
