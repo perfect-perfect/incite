@@ -14,6 +14,18 @@
     </form>
 </section> --}}
 <section>
+    Welcome {{posts.[0].user.username}}
+    <img src="{{posts.0.user.profileImage}}"> 
+</section>
+<section>
+    <form class="new-avatar-form" method="POST" action="/api/users/avatar" enctype="multipart/form-data">
+        <label for="profileImage">Upload Avatar Image</label>
+        <input type="file" name="profileImage" accept="image/*/"> 
+        <button type="submit" class="btn">Upload Avatar</button>   
+    </form>
+
+</section>
+<section>
     <h2>Ask A New Question</h2>
     <form class="new-post-form" method="POST" action="/api/posts" enctype="multipart/form-data">
         <div>
