@@ -2,6 +2,7 @@
 const router = require('express').Router();
 const { User, Post, Votepost, Answer } = require('../../models');
 const withAuth = require('../../utils/auth');
+const express = require('express')
 
 // Cloudinary/Multer
 const cloudinary = require('cloudinary').v2;
@@ -74,7 +75,7 @@ router.get('/:id', (req, res) => {
     })
         .then(dbUserData => {
             if (!dbUserData) {
-                res.status(404).json({ message: 'No user found with this id' });
+                res.status(404).json({ message: 'kys' });
                 return;
             }
             res.json(dbUserData);
@@ -162,19 +163,28 @@ router.post('/logout', withAuth, (req, res) => {
 })
 
 // PUT /api/users/avatar
-router.post('/avatar', withAuth, upload.single('profileImage'), (req, res) => {
-    console.log(req.session);
+router.post('/avatar', upload.single('avatarImage'), (req, res) => {
+    // console.log("fuck");
+    // console.log(req);
+    // res.end();
+    // res.send(req.body);
     User.update(
-        { image: req.file.path },
-        { where: {id: req.session.user_id }}
+        { 
+            // username: req.body,
+            profileImage: req.file.path
+        },
+        { where: {
+            id: req.session.user_id 
+        }}
     )
         .then(dbUserData => {
+            console.log(req.session)
             if (!dbUserData[0]) {
-                res.status(404).json({ message: 'No user found with this id' });
+                res.status(404).json({ message: `god damn it` });
                 return;
             }
             res.json(dbUserData);
-            res.redirect('/dashboard');
+            // res.redirect('/dashboard');
         })
         .catch(err => {
             console.log(err);

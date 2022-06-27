@@ -134,6 +134,8 @@ router.get('/:id', (req, res) => {
 
 // POST a post /api/posts/
 router.post('/', withAuth, upload.single('postImage'), (req, res) => {
+    console.log('req below');
+    console.log(req);
     // res.redirect('/dashboard')
     // expects {title: 'How can I X?', question: 'I am trying to X, but I am having some issues with Y', user_id: 1 }
     Post.create({

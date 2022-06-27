@@ -18,9 +18,16 @@
     <img src="{{posts.0.user.profileImage}}"> 
 </section>
 <section>
-    <form class="new-avatar-form" method="POST" action="/api/users/avatar" enctype="multipart/form-data">
-        <label for="profileImage">Upload Avatar Image</label>
-        <input type="file" name="profileImage" accept="image/*/"> 
+    <form id="avatar" method="POST" action="api/users/avatar" entype="multipart/form-data">
+        <div>
+            <label for="username">Update User Name</label>
+            <input type="text" id="username" placeholder="{{posts.0.user.username}}">
+        </div>
+        <div>
+            <label for="avatarImage">Upload Avatar Image</label>
+            <input type="file" name="avatarImage" accept="image/*/"> 
+            {{!-- <input type="file" name="avatarImage">  --}}
+        </div>
         <button type="submit" class="btn">Upload Avatar</button>   
     </form>
 
@@ -61,3 +68,4 @@
 
 {{!-- gives the handlebars access to the js file that allows us to add posts --}}
 {{!-- <script src="/javascript/add-post.js"></script> --}}
+{{!-- <script src="/javascript/add-avatar.js"></script> --}}
