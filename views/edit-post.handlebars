@@ -1,12 +1,18 @@
-<article>
-    <a href="/dashboard">&larr; Back to dashboard</a>
-    <h2>
+<article class="edit-post">
+    <div>
+        <a href="/dashboard">&larr; Back to dashboard</a>
+    </div>
+    
+    <div class="edit-post-header">
+       <h2>
         Edit Post
-    </h2>
+        </h2> 
+    </div>
     <form class="edit-post-form">
         {{!-- title is an editable form field --}}
         <div>
-            <input name="post-title" type="text" value="{{post.title}}" />
+            <label for="title">Title:</label>
+            <input name="post-title" type="text" value="{{post.title}}" style="width: 420px; height: 30px;"/>
             <p>{{post.question}}</p>
         </div>
         <div>
@@ -14,11 +20,15 @@
             |
             <a href=="/post/{{post.id}}">{{post.answers.length}} {{format_plural "answer" post.answers.length}}</a>
         </div>
-        <button type="submit">Save post</button>
+        <button type="submit" class="save-btn">Save post</button>
+        {{#if post.answers.length}}
+        <h4>If a question was answered, it can no longer be deleted</h4>
+        {{else}}
         <button type="button" class="delete-post-btn">Delete post</button>
+        {{/if}}
     </form>
 </article>
-<form class="answer-form">
+{{!-- <form class="answer-form">
     <div>
         <textarea name="answer-body"></textarea>
     </div>
@@ -26,10 +36,14 @@
     <div>
         <button type="submit">add answer</button>
     </div>
-</form>
+</form> --}}
 {{!-- answer's partial --}}
 {{> answers post.answers}}
 
 <script src="/javascript/edit-post.js"></script>
+{{#if post.answers.length}}
+<div></div>
+{{else}}
 <script src="/javascript/delete-post.js"></script>
-<script src="/javascript/answer.js"></script>
+{{/if}}
+{{!-- <script src="/javascript/answer.js"></script> --}}

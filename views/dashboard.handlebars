@@ -32,7 +32,7 @@
             <label for="postImage">Upload Image</label>
             <input type="file" name="postImage" accept="image/*/">
         </div>
-        <button type="submit" class="btn">Create</button>
+        <button type="submit" class="create-btn">Create</button>
     </form>
 
 </section>
@@ -47,7 +47,9 @@
         {{#each posts as |post|}}
         <li>
             {{> post-info post}}
-            <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit Question</a>
+            <div class="edit-page">
+                <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit Question</a>
+            </div>
         </li>
         {{/each}}
     </ol>
