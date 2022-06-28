@@ -4,7 +4,7 @@
     {{!-- any HTML code in between will be repeated for every item in 'posts' --}}
     {{!-- we then declare a variable name 'post' for each object in the array --}}
     {{#each posts as |post|}}
-    <li>
+    <li class="post-list-item">
         {{!-- to use a partial we use a '>' followed by the name of the partial file 'post-info' and the object we'll pass to the partial 'post' --}}
         {{> post-info post }}
     </li>

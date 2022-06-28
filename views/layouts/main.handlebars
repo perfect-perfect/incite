@@ -11,16 +11,25 @@
 <body>
     <div class="wrapper">
         <header>
-            <h1>
-                <a href="/">Incite</a>
-            </h1>
-            <nav>
-                {{#if loggedIn}}
-                <a href="/dashboard">dashboard</a>
-                <button id="logout" class="btn-no-style">logout</button>
-                {{else}}
-                <a href="/login">login</a>
-                {{/if}}
+ 
+            <nav class="nav">
+                <div class="nav-item">
+                    <a href="/">Incite</a>
+                </div>
+                <div class="nav-right">
+                    {{#if loggedIn}}
+                    <div class="nav-item">
+                        <a href="/dashboard">dashboard</a>
+                    </div>
+                    <div class="nav-item">
+                        <button id="logout" class="btn-no-style">logout</button>
+                    </div>
+                    {{else}}
+                    <div class="nav-item">
+                        <a href="/login">login</a>
+                    </div>
+                    {{/if}}
+                </div>
             </nav>
         </header>
         <main>

@@ -1,14 +1,23 @@
 <article class="post">
-    <div class="title">
-        <a href="/post/{{id}}" target="blank">{{title}}</a>
-        <p>{{question}}</p>
-        <img src="{{image}}" alt="post image">
-    </div>
-    <div class="meta">
-        {{!-- format_plural takes two arguments so we pass 'point' as the first and 'vote_count' as the second --}}
-        {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
-        {{format_date created_at}}
-        |
-        <a href="/post/{{id}}">{{answers.length}} {{format_plural "answer" answers.length}}</a>
+    <div class="single-post-container">
+        <div class="title">
+            <h3>{{title}}</h3>
+            <p>{{question}}</p>
+            <h3 class="related">Related Image</h3>
+            <img src="{{image}}" alt="post image">
+        </div>
+        <div class="meta">
+            {{!-- format_plural takes two arguments so we pass 'point' as the first and 'vote_count' as the second --}}
+            {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
+            {{format_date created_at}}
+            |
+            <a href="/post/{{id}}">{{answers.length}} {{format_plural "answer" answers.length}}</a>
+        </div>
+        <div>
+            <button type="button" class="upvote-btn">upvote</button>
+        </div>
     </div>
 </article>
+{{#if loggedIn}}
+<script src="/javascript/upvote.js"></script>
+{{/if}}

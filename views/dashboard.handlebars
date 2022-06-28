@@ -13,8 +13,11 @@
         <button type="submit" class="btn">Create</button>
     </form>
 </section> --}}
-<section>
-    <h2>Ask A New Question</h2>
+<section class="dashboard-form">
+    <div class="ask-question">
+        <h2>Ask A New Question</h2>
+    </div>
+
     <form class="new-post-form" method="POST" action="/api/posts" enctype="multipart/form-data">
         <div>
             <label for="title">Title</label>
@@ -22,7 +25,8 @@
         </div>
         <div>
             <label for="question">Question</label>
-            <input id="question" name="question" />
+            {{!-- <input id="question" name="question" /> --}}
+            <textarea id="question" name="question" style="width: 300px; height: 240px;"></textarea>
         </div>
         <div>
             <label for="postImage">Upload Image</label>
@@ -34,8 +38,11 @@
 </section>
 
 {{#if posts.length}}
-<section>
-    <h2>Your Questions</h2>
+<section class="dashboard-posts">
+    <div class="your-questions">
+        <h2>Your Questions</h2>
+    </div>
+    
     <ol>
         {{#each posts as |post|}}
         <li>
