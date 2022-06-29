@@ -1,12 +1,33 @@
 const router = require('express').Router();
 // Why did we include the 'User' as well?
 //  - in a query to the 'post' table, we would like to retrieve not only information about each post, but also the user that posted it
-const { Post, User, Votepost, Answer } = require('../../models');
+const { Post, User, Votepost, Answer, Voteanswer } = require('../../models');
 // in order to the upvote route so that when we vote on a post
 //  - we receive the post's updated info
 //  - we have to call on special Sequelize functionality  'sequelize.literal' so we hae to inpirt sequelize here
 const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
+
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+require ('dotenv').config();
+const path = require('path');
+const multer = require('multer');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+})
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'Image',
+    }
+});
+
+const upload = multer({ storage: storage });
 
 // GET all posts /api/posts/
 router.get('/', (req, res) => {
@@ -15,7 +36,8 @@ router.get('/', (req, res) => {
         attributes: [
             'id', 
             'title', 
-            'question', 
+            'question',
+            'image', 
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'),'vote_count']
         ],
@@ -61,7 +83,8 @@ router.get('/:id', (req, res) => {
         attributes: [
             'id', 
             'title', 
-            'question', 
+            'question',
+            'image', 
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'), 'vote_count']
         ],
@@ -78,6 +101,16 @@ router.get('/:id', (req, res) => {
                 include: {
                     model: User,
                     attributes: ['username']
+                },
+
+            },
+            {
+                model: Answer,
+                include: {
+                    model: Voteanswer,
+                    attributes: [
+                        [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE post.id = voteanswer.post_id)'), 'answervote_count']
+                    ]
                 }
             },
             {
@@ -100,18 +133,23 @@ router.get('/:id', (req, res) => {
 });
 
 // POST a post /api/posts/
-router.post('/', withAuth, (req, res) => {
+router.post('/', withAuth, upload.single('postImage'), (req, res) => {
+    // res.redirect('/dashboard')
     // expects {title: 'How can I X?', question: 'I am trying to X, but I am having some issues with Y', user_id: 1 }
     Post.create({
         title: req.body.title,
         question: req.body.question,
-        user_id: req.session.user_id
+        user_id: req.session.user_id,
+        image: req.file.path
     })
-        .then(dbPostData => res.json(dbPostData))
+        .then(dbPostData => {
+            res.redirect('/dashboard')
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
+    
 });
 
 // PUT /api/posts/upvote
@@ -127,6 +165,7 @@ router.put('/upvote', withAuth, (req, res) => {
         //  - What are the destructured properties on 'req.body'
         //      - i believe it is post_id: id from the upvote.js static js file that responds to the clicking of the upvote button
         // 'upvote()' is a custom static method created in models/Post.js
+        // console.log(...req.body)
         Post.upvote(
             { 
                 ...req.body,
@@ -172,6 +211,25 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 // DELETE a post /api/posts/:id
+// router.delete('/:id', withAuth, (req, res) => {
+//     Post.destroy({
+//         where: {
+//             id: req.params.id
+//         }
+//     })
+//         .then(dbPostData => {
+//             if (!dbPostData) {
+//                 res.status(404).json({ message: 'No post found with this id' });
+//                 return;
+//             }
+//             res.json(dbPostData);
+//         })
+//         .catch(err => {
+//             console.log(err);
+//             res.status(500).json(err);
+//         });
+// });
+
 router.delete('/:id', withAuth, (req, res) => {
     Post.destroy({
         where: {

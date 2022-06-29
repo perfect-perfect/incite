@@ -18,6 +18,7 @@ Voteanswer.init(
                 key: 'id'
             }
         },
+        // potential solution
         // post_id: {
         //     type: DataTypes.INTEGER,
         //     allowNull: false,

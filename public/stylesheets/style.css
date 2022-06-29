@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 
+
 body, html {
   height: 100%;
   padding: 0;
@@ -10,9 +11,45 @@ body, html {
   color: #333;
 }
 
-a {
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* height: 20%; */
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background-color: rgba(254, 0, 42, 0.75)
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item button {
+  font-size: 1.25em;
+  color: black;
+
+}
+
+.nav a {
+  font-size: 1.25em;
+  margin-left: 10px;
+  margin-right: 10px;
   text-decoration: none;
-  color: #225ca3;
+  color: black
+}
+
+.nav-item {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+a {
+  text-decoration:underline;
+  color: #5c9bcf;
   font-weight: bold;
   transition: color .1s;
 }
@@ -68,18 +105,25 @@ form label {
 .wrapper {
   width: 100%;
   min-height: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
 
+
 header {
-  border-bottom: 1px solid #ccc;
+  /* border-bottom: 5px solid #fe002a; */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0 1%;
+  height: 350px;
+  width: 100%;
+  position: relative;
+  background-image: url("../src/hero-img.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 header h1 {
@@ -89,6 +133,7 @@ header h1 {
 main {
   flex: 1;
   padding: 2% 4%;
+  background-color: #fff2a1;
 }
 
 .btn-no-style {
@@ -118,8 +163,19 @@ main {
 }
 
 .post {
-  margin-bottom: 2%;
-  line-height: 150%;
+  margin-bottom: 10px;
+  padding: 7px;
+  /* line-height: 150%; */
+  background-color: #fff5eb;
+}
+
+.post-list-item {
+  margin: 5px;
+}
+
+.post-container {
+  margin: 10px;
+  /* background-color: #fff5eb; */
 }
 
 .post .title span {
@@ -128,9 +184,9 @@ main {
   color: #7d7d7d;
 }
 
-.edit-link {
+.edit-page {
   display: block;
-  margin: -1.5% 0 2% 0;
+  margin: -30px 0px 20px 17px;
 }
 
 .upvote-btn {
@@ -139,6 +195,15 @@ main {
 }
 
 .upvote-btn:hover {
+  background-color: #1f9c13;
+}
+
+.helpful-btn {
+  background-color: #197d0f;
+  transition: background-color .1s;
+}
+
+.helpful-btn:hover {
   background-color: #1f9c13;
 }
 
@@ -169,8 +234,208 @@ main {
   margin-bottom: 5%;
 }
 
+/* BEGIN DASHBOARD */
+.dashboard-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.ask-question {
+  /* display: block; */
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.ask-question h2 {
+  text-decoration: underline;
+  text-decoration-color: #fe002a;
+  text-decoration-thickness: 3px;
+}
+
+/* .dashboard-posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+} */
+.create-btn {
+  width: 100%;
+  height: 30px;
+}
+
+.your-questions {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.your-questions h2 {
+  text-decoration: underline;
+  text-decoration-color: #fe002a;
+  text-decoration-thickness: 3px;
+}
+
+.single-post {
+  width: 80%;
+}
+
+.meta {
+  margin-bottom: 22px;
+}
+
+/* BEGIN SINGLE POST PAGE */
+.single-post-container {
+  margin: 20px;
+  /* background-color: #fff5eb; */
+}
+
+.single-post-container img {
+  width: 600px;
+  height: 600px;
+  background-color:#b1b1b1;
+}
+
+.contain {
+  object-fit: contain;
+  opacity: 1;
+  /* display: block; */
+  width: 100%;
+  height: auto;
+  transition: .5 ease;
+  backface-visibility: hidden;
+
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  /* position: absolute; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.image-container:hover .contain {
+  opacity: 0.3;
+}
+
+.image-container:hover .middle {
+  opacity: 1;
+}
+
+.fade-text {
+  color: black;
+  font-size: 20px
+}
+
+
+.upvote-btn {
+  margin-top: 10px;
+}
+
+/* .title a {
+  font-size: 1.25em;
+} */
+
+.answer-question h2 {
+  text-decoration: underline;
+  text-decoration-color: #fe002a;
+  text-decoration-thickness: 3px;
+}
+
+.helpful-btn {
+  margin-top: 10px;
+}
+
+.related {
+  text-decoration: underline;
+  text-decoration-color: #fe002a;
+}
+
+/* Begin Edit Post */
+.edit-post {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-post-header {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-post-form .save-btn {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  justify-content: center;
+}
+
+/* Begin Login Page */
+.login-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  width: 420px;
+}
+
+.login-form div input {
+  width: 420px;
+}
+
+.login-form button {
+  width: 100%;
+}
+
+.login-signup-links {
+  display: flex;
+  justify-content: center;
+}
+
+/* Begin Signup Page */
+.signup-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-form {
+  width: 420px;
+}
+
+.signup-form div input {
+  width: 420px;
+}
+
+.signup-form button { 
+  width: 100%;
+}
+
+.signup-login-link {
+  display: flex;
+  justify-content: center;
+}
+
+/* Begin Footer */
 footer {
   border-top: 1px solid #ccc;
+  background-color: #fff2a1;
   display: flex;
   justify-content: center;
   padding: 1%;

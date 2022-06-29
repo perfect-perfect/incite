@@ -1,0 +1,30 @@
+<article class="post">
+    <div class="single-post-container">
+        <div class="title">
+            <h3 class="related">Question</h3>
+            <h3>{{title}}</h3>
+            <p>{{question}}</p>
+            <h3 class="related">Related Image</h3>
+            <div class="image-container">
+                <a href="{{image}}" target="_blank">
+                    <img src="{{image}}" class="contain" alt="post image">
+                    <div class="middle"></div>
+                </a>
+            </div>
+
+        </div>
+        <div class="meta">
+            {{!-- format_plural takes two arguments so we pass 'point' as the first and 'vote_count' as the second --}}
+            {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
+            {{format_date created_at}}
+            |
+            <a href="/post/{{id}}">{{answers.length}} {{format_plural "answer" answers.length}}</a>
+        </div>
+        <div>
+            <button type="button" class="upvote-btn">upvote</button>
+        </div>
+    </div>
+</article>
+{{#if loggedIn}}
+<script src="/javascript/upvote.js"></script>
+{{/if}}

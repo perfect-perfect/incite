@@ -64,7 +64,7 @@ Post.hasMany(Votepost, {
 })
 // END VOTEPOST ASSOCIATIONS
 
-// BEING ANSWER ASSOCIATIONS
+// BEGIN ANSWER ASSOCIATIONS
 Answer.belongsTo(User, {
     foreignKey: 'user_id'
 });
@@ -95,6 +95,13 @@ Answer.belongsToMany(User, {
     foreignKey: 'answer_id'
 })
 
+// potential solution to not being able to find answer.id in home-routes.js '/post/:id' 
+// Post.belongsToMany(Answer, {
+//     through: Voteanswer,
+//     as: 'voted_answer',
+//     foreignKey: 'post_id'
+// })
+
 // link 'Answer' and 'Voteanswer' so we can see the total number of votes on an answer
 Voteanswer.belongsTo(User, {
     foreignKey: 'user_id'
@@ -104,6 +111,11 @@ Voteanswer.belongsTo(Answer, {
     foreignKey: 'answer_id'
 });
 
+// potential solution
+// Voteanswer.belongsTo(Post, {
+//     foreignKey: 'post_id'
+// })
+
 User.hasMany(Voteanswer, {
     foreignKey: 'user_id'
 });
@@ -111,6 +123,11 @@ User.hasMany(Voteanswer, {
 Answer.hasMany(Voteanswer, {
     foreignKey: 'answer_id'
 })
+
+// potential solution
+// Post.hasMany(Voteanswer, {
+//     foreignKey: 'post_id'
+// })
 
 // export models
 module.exports = { User, Post, Votepost, Answer, Voteanswer };

@@ -47,7 +47,11 @@ User.init(
                 // this means the password must be at least four characters long
                 len: [4]
             }
-        }
+        },
+        // profileImage: {
+        //     type: DataTypes.STRING,
+        //     defaultValue: "../image/empty-avatar.png"
+        // }
     },
     {
         hooks: {

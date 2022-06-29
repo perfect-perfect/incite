@@ -31,7 +31,9 @@ router.get('/', withAuth, (req, res) => {
             },
             {
                 model: User,
-                attributes: ['username']
+                attributes: [
+                    'username'
+                ]
             }
         ]
     })
@@ -39,6 +41,8 @@ router.get('/', withAuth, (req, res) => {
             //serialize data before passing to template
             // why does it go from 'posts' to 'post'
             const posts = dbPostData.map(post => post.get({ plain: true}));
+
+            console.log(posts)
 
             // we'll hardcode the 'loggedIn' property as 'true' because a user won't be able to get to the dashboard unless they're logged in
             // we pass in posts which is the mapped out results of the 'Post.findAll()'
