@@ -5,7 +5,13 @@
             <h3>{{title}}</h3>
             <p>{{question}}</p>
             <h3 class="related">Related Image</h3>
-            <img src="{{image}}" alt="post image">
+            <div class="image-container">
+                <a href="{{image}}" target="_blank">
+                    <img src="{{image}}" class="contain" alt="post image">
+                    <div class="middle"></div>
+                </a>
+            </div>
+
         </div>
         <div class="meta">
             {{!-- format_plural takes two arguments so we pass 'point' as the first and 'vote_count' as the second --}}

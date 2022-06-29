@@ -76,6 +76,15 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
+router.get('/signup', (req, res) =>{
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('signup');
+})
+
+
 // HTTPS request is http://localhost:3001/api/post/{{post.id}}
 // nptice that the api is different, it is 'posts'
 router.get('/post/:id', (req, res) => {

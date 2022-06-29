@@ -295,6 +295,48 @@ main {
   /* background-color: #fff5eb; */
 }
 
+.single-post-container img {
+  width: 600px;
+  height: 600px;
+  background-color:#b1b1b1;
+}
+
+.contain {
+  object-fit: contain;
+  opacity: 1;
+  /* display: block; */
+  width: 100%;
+  height: auto;
+  transition: .5 ease;
+  backface-visibility: hidden;
+
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  /* position: absolute; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.image-container:hover .contain {
+  opacity: 0.3;
+}
+
+.image-container:hover .middle {
+  opacity: 1;
+}
+
+.fade-text {
+  color: black;
+  font-size: 20px
+}
+
+
 .upvote-btn {
   margin-top: 10px;
 }
@@ -340,9 +382,60 @@ main {
   justify-content: center;
 }
 
+/* Begin Login Page */
+.login-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
 
+.login-form {
+  width: 420px;
+}
+
+.login-form div input {
+  width: 420px;
+}
+
+.login-form button {
+  width: 100%;
+}
+
+.login-signup-links {
+  display: flex;
+  justify-content: center;
+}
+
+/* Begin Signup Page */
+.signup-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-form {
+  width: 420px;
+}
+
+.signup-form div input {
+  width: 420px;
+}
+
+.signup-form button { 
+  width: 100%;
+}
+
+.signup-login-link {
+  display: flex;
+  justify-content: center;
+}
+
+/* Begin Footer */
 footer {
   border-top: 1px solid #ccc;
+  background-color: #fff2a1;
   display: flex;
   justify-content: center;
   padding: 1%;
