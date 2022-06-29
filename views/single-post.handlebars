@@ -3,19 +3,21 @@
 {{!-- include the form and answers below --}}
 {{!-- conditionally render answer form, only if there is a session open --}}
 {{#if loggedIn}}
-<form class="answer-form">
-    <div class="answer-question">
-        <h2>Answer Question</h2>
-    </div>
-    <div>
-        <textarea name="answer-body"></textarea>
-    </div>
+<div class="answer-form-container">
+    <form class="answer-form">
+        <div class="answer-question">
+            <h2>Answer Question</h2>
+        </div>
+        <div>
+            <textarea name="answer-body"></textarea>
+        </div>
 
-    <div>
-        <button type="submit">add answer</button>
-        {{!-- <button type="button" class="upvote-btn">upvote</button> --}}
-    </div>
-</form>
+        <div>
+            <button type="submit">add answer</button>
+            {{!-- <button type="button" class="upvote-btn">upvote</button> --}}
+        </div>
+    </form>
+</div>
 {{/if}}
 {{> answers post.answers}}
 {{#if loggedIn}}

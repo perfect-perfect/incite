@@ -345,6 +345,31 @@ main {
   font-size: 1.25em;
 } */
 
+.answer-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.answer-form {
+  justify-content: center;
+  width: 100%;
+}
+
+.answer-question {
+  width: 100%;
+}
+
+.answer-form textarea {
+  width: 100%;
+  height: 500px;
+}
+
+.answer-form button {
+  width: 100%;
+}
+
 .answer-question h2 {
   text-decoration: underline;
   text-decoration-color: #fe002a;
