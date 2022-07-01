@@ -234,6 +234,11 @@ main {
   margin-bottom: 5%;
 }
 
+.edit-post-form button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 /* BEGIN DASHBOARD */
 .dashboard-form {
   display: flex;
@@ -281,6 +286,14 @@ main {
   text-decoration-thickness: 3px;
 }
 
+.post-text {
+  margin: 10px 0;
+}
+
+/* .post-text span {
+  color: black;
+} */
+
 .single-post {
   width: 80%;
 }
@@ -299,6 +312,10 @@ main {
   width: 600px;
   height: 600px;
   background-color:#b1b1b1;
+}
+
+.single-post-text span {
+  color: black;
 }
 
 .contain {
@@ -373,6 +390,10 @@ main {
   width: 100%;
   justify-content: center;
   align-items: center;
+}
+
+.edit-post-form .post-title-field{
+  width: 100%
 }
 
 .edit-post-form .save-btn {

@@ -12,8 +12,11 @@
         {{!-- title is an editable form field --}}
         <div>
             <label for="title">Title:</label>
-            <input name="post-title" type="text" value="{{post.title}}" style="width: 420px; height: 30px;"/>
-            <p>{{post.question}}</p>
+            <input name="post-title" type="text" class="post-title-field" value="{{post.title}}" />
+            <div class = "post-text">
+                <span style="white-space: pre-wrap">{{post.question}}</span>
+            </div>
+            {{!-- <p>{{post.question}}</p> --}}
         </div>
         <div>
             {{post.vote_count}} {{format_plural "point" post.vote_count}} by you on {{format_date post.created_at}}
