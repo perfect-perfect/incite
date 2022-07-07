@@ -35,8 +35,7 @@ router.get('/', (req, res) => {
         attributes: [
             'id', 
             'title', 
-            'question',
-            'image', 
+            'question', 
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'),'vote_count']
         ],
@@ -83,7 +82,6 @@ router.get('/:id', (req, res) => {
             'id', 
             'title', 
             'question',
-            'image', 
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'), 'vote_count']
         ],
@@ -132,7 +130,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST a post /api/posts/
-router.post('/', withAuth, upload.single('postImage'), (req, res) => {
+router.post('/', withAuth, (req, res) => {
     // res.redirect('/dashboard')
     // expects {title: 'How can I X?', question: 'I am trying to X, but I am having some issues with Y', user_id: 1 }
     Post.create({

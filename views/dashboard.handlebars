@@ -13,11 +13,12 @@
         <button type="submit" class="btn">Create</button>
     </form>
 </section> --}}
+{{#if posts.length}}
 <section>
     Welcome {{posts.[0].user.username}}
     <img src="{{posts.0.user.avatar}}"> 
 </section>
-
+{{/if}}
 <section class="dashboard-form">
 
     <form class="avatar-form" method="POST" action="/api/users/avatar" enctype="multipart/form-data">
@@ -25,6 +26,7 @@
             <label for="avatar">Update Avatar</label>
             <input type="file" name="avatar" accept="image/*">
         </div>
+        <button type="submit" class="btn">Upload Avatar</button>  
     </form>
 
 
