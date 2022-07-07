@@ -13,6 +13,11 @@
         <button type="submit" class="btn">Create</button>
     </form>
 </section> --}}
+<section>
+    Welcome {{posts.[0].user.username}}
+    <img src="{{posts.0.user.avatar}}"> 
+</section>
+
 <section class="dashboard-form">
 
     <form class="avatar-form" method="POST" action="/api/users/avatar" enctype="multipart/form-data">
