@@ -14,15 +14,19 @@
     </form>
 </section> --}}
 {{#if posts.length}}
-<section>
-    Welcome {{posts.[0].user.username}}
-    <img src="{{posts.0.user.avatar}}"> 
+<section class="user-info">
+    <div class="avatar-container">
+        <img src="{{posts.0.user.avatar}}"> 
+    </div>
+    <div class="welcome-container">
+        <h2>Welcome {{posts.[0].user.username}}!</h2>
+    </div>
 </section>
 {{/if}}
-<section>
+<section class="avatar-form-container">
     <form class="avatar-form" method="POST" action="/api/users/avatar" enctype="multipart/form-data">
         <div>
-            <label for="avatar">Update Avatar</label>
+            <label for="avatar"><h2>Update Avatar</h2></label>
             <input type="file" name="avatar" accept="image/*">
         </div>
         <button type="submit" class="btn">Upload Avatar</button>  

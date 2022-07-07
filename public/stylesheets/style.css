@@ -235,6 +235,74 @@ main {
 }
 
 /* BEGIN DASHBOARD */
+
+.avatar-container img {
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.user-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0px;
+}
+
+.avatar-form-container {
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-form-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* .avatar-form {
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+} */
+
+.avatar-form label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-decoration: underline;
+  text-decoration-color: #fe002a;
+  text-decoration-thickness: 3px;
+}
+
+.avatar-form button {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.avatar-from div input {
+  width: 100;
+}
+
+
 .dashboard-form {
   display: flex;
   flex-wrap: wrap;
