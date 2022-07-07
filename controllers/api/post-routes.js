@@ -133,6 +133,7 @@ router.get('/:id', (req, res) => {
 router.post('/', withAuth, (req, res) => {
     // res.redirect('/dashboard')
     // expects {title: 'How can I X?', question: 'I am trying to X, but I am having some issues with Y', user_id: 1 }
+    console.log(req.body);
     Post.create({
         title: req.body.title,
         question: req.body.question,
