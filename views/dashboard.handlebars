@@ -22,7 +22,7 @@
         <h2>Welcome {{posts.[0].user.username}}!</h2>
     </div>
 </section>
-{{/if}}
+
 <section class="avatar-form-container">
     <form class="avatar-form" method="POST" action="/api/users/avatar" enctype="multipart/form-data">
         <div>
@@ -32,6 +32,11 @@
         <button type="submit" class="btn">Upload Avatar</button>  
     </form>
 </section>
+{{else}}
+<section class="no-post-header">
+    <h3>Make your first post to unlock all user features!</h3>
+</section>
+{{/if}}
 
 <section class="dashboard-form">
 

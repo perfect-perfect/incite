@@ -302,6 +302,12 @@ main {
   width: 100;
 }
 
+.no-post-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
 
 .dashboard-form {
   display: flex;
