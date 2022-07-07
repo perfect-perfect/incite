@@ -50,7 +50,7 @@ User.init(
         },
         avatar: {
             type: DataTypes.STRING,
-            defaultValue: "../image/empty-avatar.png"
+            defaultValue: "/src/empty-avatar.png"
         }
     },
     {

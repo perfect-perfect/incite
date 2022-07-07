@@ -127,7 +127,7 @@ router.post('/avatar', upload.single('avatar'), (req, res) => {
             if (!dbUserData) {
                 res.status(404).json({ message: 'you are here'})
             }
-            res.json(dbUserData);
+            res.redirect('/dashboard');
         })
         .catch(err => {
             console.log(err);
