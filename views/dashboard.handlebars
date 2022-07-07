@@ -19,8 +19,7 @@
     <img src="{{posts.0.user.avatar}}"> 
 </section>
 {{/if}}
-<section class="dashboard-form">
-
+<section>
     <form class="avatar-form" method="POST" action="/api/users/avatar" enctype="multipart/form-data">
         <div>
             <label for="avatar">Update Avatar</label>
@@ -28,6 +27,9 @@
         </div>
         <button type="submit" class="btn">Upload Avatar</button>  
     </form>
+</section>
+
+<section class="dashboard-form">
 
 
     <div class="ask-question">
