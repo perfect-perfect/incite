@@ -14,6 +14,15 @@
     </form>
 </section> --}}
 <section class="dashboard-form">
+
+    <form class="avatar-form" method="POST" action="/api/users/avatar" enctype="multipart/form-data">
+        <div>
+            <label for="avatar">Update Avatar</label>
+            <input type="file" name="avatar" accept="image/*">
+        </div>
+    </form>
+
+
     <div class="ask-question">
         <h2>Ask A New Question</h2>
     </div>
@@ -28,10 +37,10 @@
             {{!-- <input id="question" name="question" /> --}}
             <textarea id="question" name="question" style="width: 300px; height: 240px;"></textarea>
         </div>
-        <div>
+        {{!-- <div>
             <label for="postImage">Upload Image</label>
             <input type="file" name="postImage" accept="image/*/">
-        </div>
+        </div> --}}
         <button type="submit" class="create-btn">Create</button>
     </form>
 

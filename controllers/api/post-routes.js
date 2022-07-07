@@ -8,27 +8,25 @@ const { Post, User, Votepost, Answer, Voteanswer } = require('../../models');
 const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-require ('dotenv').config();
-const path = require('path');
-const multer = require('multer');
+// post.image.change
+// const cloudinary = require('cloudinary').v2;
+// const { CloudinaryStorage } = require('multer-storage-cloudinary');
+// require ('dotenv').config();
+// const path = require('path');
+// const multer = require('multer');
 
-cloudinary.config({
-    // cloud_name: process.env.CLOUD_NAME, 
-    // api_key: process.env.CLOUDINARY_API_KEY,
-    // api_secret: process.env.CLOUDINARY_API_SECRET,
-    cloudinary_url: process.env.CLOUDINARY_URL
-})
+// cloudinary.config({
+//     cloudinary_url: process.env.CLOUDINARY_URL
+// })
 
-const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-        folder: 'Image',
-    }
-});
+// const storage = new CloudinaryStorage({
+//     cloudinary: cloudinary,
+//     params: {
+//         folder: 'Image',
+//     }
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
 // GET all posts /api/posts/
 router.get('/', (req, res) => {
@@ -141,7 +139,7 @@ router.post('/', withAuth, upload.single('postImage'), (req, res) => {
         title: req.body.title,
         question: req.body.question,
         user_id: req.session.user_id,
-        image: req.file.path
+        // image: req.file.path
     })
         .then(dbPostData => {
             res.redirect('/dashboard')

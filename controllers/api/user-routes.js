@@ -2,6 +2,27 @@
 const router = require('express').Router();
 const { User, Post, Votepost, Answer } = require('../../models');
 const withAuth = require('../../utils/auth');
+const sequelize = require('../../config/connection');
+
+
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+require ('dotenv').config();
+const path = require('path');
+const multer = require('multer');
+
+cloudinary.config({
+    cloudinary_url: process.env.CLOUDINARY_URL
+})
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'avatars',
+    }
+});
+
+const upload = multer({ storage: storage });
 
 // Get /api/users
 router.get('/', (req, res) => {
@@ -16,6 +37,7 @@ router.get('/', (req, res) => {
             res.status(500).json(err);
         })
 });
+
 
 // GET /api/users/:id
 router.get('/:id', (req, res) => {
@@ -87,6 +109,31 @@ router.post('/', (req, res) => {
             res.status(500).json(err);
         });
 });
+
+// POST an avatar image to /api/users/avatar
+router.post('/avatar', upload.single('avatar'), (req, res) => {
+    User.update(
+        {
+            avatar: req.file.path
+        },
+        {
+            where: {
+                id: req.session.user_id
+            }
+        }
+
+    )
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'you are here'})
+            }
+            res.json(dbUserData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+})
 
 // POST login /api/users/login
 // POST carries the request in the 'req.body' which is more secure then a GET request which carries it in the parameter (url)

@@ -58,10 +58,11 @@ Post.init(
                 key: 'id'
             }
         },
-        image: {
-            type: DataTypes.STRING,
-            allowNull: true
-        }
+        // post.image.change
+        // image: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // }
     },
     {
         sequelize,
