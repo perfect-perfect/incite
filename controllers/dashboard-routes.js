@@ -86,7 +86,10 @@ router.get('/edit/:id', withAuth, (req, res) => {
             },
             {
                 model: User,
-                attributes: ['username']
+                attributes: [
+                    'username',
+                    'avatar'
+                ]
             }
         ]
     })
