@@ -173,7 +173,7 @@ main {
 
 .post-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
   margin: 10px;
