@@ -5,6 +5,7 @@ require('dotenv').config();
 
 let sequelize;
 
+// connects sequelize to either local environment database or heroku database
 if (process.env.JAWSDB_URL) {
     sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
@@ -15,4 +16,5 @@ if (process.env.JAWSDB_URL) {
     });
 }
 
+// export sequelize so we can import it anywhere throughout the application
 module.exports = sequelize;

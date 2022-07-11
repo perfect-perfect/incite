@@ -28,7 +28,7 @@ const withAuth = require('../../utils/auth');
 
 // const upload = multer({ storage: storage });
 
-// GET all posts /api/posts/
+// GET all posts /api/posts
 router.get('/', (req, res) => {
     console.log('==============');
     Post.findAll({
