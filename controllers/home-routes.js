@@ -28,13 +28,19 @@ router.get('/', (req, res) => {
                 include: [
                     {
                         model: User,
-                        attributes: ['username']
+                        attributes: [
+                            'username',
+                            'avatar'
+                        ]
                     }
                 ]
             },
             {
                 model: User,
-                attributes: ['username']
+                attributes: [
+                    'username',
+                    'avatar'
+                ]
             }
         ]
     })
@@ -53,6 +59,7 @@ router.get('/', (req, res) => {
             //          - to loop over this array we'll have to employ handlebars 'helpers' that can loop thorugh arrays on the homepage
             // we use '.render()' to specify which template we want to use
             // in this case we want 'homepage.handlebars'
+            console.log(posts);
             res.render('homepage', { 
                 posts ,
                 loggedIn: req.session.loggedIn
@@ -113,7 +120,10 @@ router.get('/post/:id', (req, res) => {
                 // order: [[sequelize.literal('`answervote_count` DESC')]],
                 include: {
                     model: User,
-                    attributes: ['username']
+                    attributes: [
+                        'username',
+                        'avatar'
+                    ]
                 },
             },
             {
@@ -136,7 +146,10 @@ router.get('/post/:id', (req, res) => {
             },
             {
                 model: User,
-                attributes: ['username'],
+                attributes: [
+                    'username',
+                    'avatar'
+                ]
             },
             // {
             //     model: Voteanswer,

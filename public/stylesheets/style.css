@@ -89,10 +89,10 @@ textarea:focus, input:focus {
   border: 1px solid #3486eb;
 }
 
-textarea {
+/* textarea {
   min-width: 40%;
   min-height: 100px;
-}
+} */
 
 form > div {
   margin-bottom: 2%;
@@ -162,6 +162,27 @@ main {
   background-color: #ff643d;
 }
 
+/* BEGIN HOMEPAGE */
+.home-avatar-container img {
+  height: 75px;
+  width: 75px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px;
+  /* background-color: #fff5eb; */
+}
+
+
+/* END HOMEPAGE */
+
 .post {
   margin-bottom: 10px;
   padding: 7px;
@@ -173,10 +194,7 @@ main {
   margin: 5px;
 }
 
-.post-container {
-  margin: 10px;
-  /* background-color: #fff5eb; */
-}
+
 
 .post .title span {
   font-style: italic;
@@ -220,14 +238,17 @@ main {
   background-color: #fff5eb;
 }
 
-.answer .meta {
-  font-size: 90%;
-  margin-bottom: .5%;
-  opacity: .6;
+.new-post-form {
+  width: 100%;
 }
 
 .new-post-form input {
-  width: 300px;
+  width: 100%;
+}
+
+.new-post-form textarea {
+  width: 100%;
+  height: 400px;
 }
 
 .edit-post-form {
@@ -373,11 +394,19 @@ main {
   /* background-color: #fff5eb; */
 }
 
+.single-post-avatar-container {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+/* 
 .single-post-container img {
   width: 600px;
   height: 600px;
   background-color:#b1b1b1;
-}
+} */
 
 .contain {
   object-fit: contain;
@@ -448,10 +477,25 @@ main {
   width: 100%;
 }
 
+.answer-avatar-container img {
+  height: 75px;
+  width: 75px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 .answer-question h2 {
   text-decoration: underline;
   text-decoration-color: #fe002a;
   text-decoration-thickness: 3px;
+}
+
+.answer .text {
+  font-size: 90%;
+  margin-bottom: 10px;
+  opacity: .6;
 }
 
 .helpful-btn {
