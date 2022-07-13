@@ -10,9 +10,6 @@
         <div >
             <img src="{{user.avatar}}" alt="user avatar" class="single-post-avatar-container">
         </div>
-        <div >
-            <img src="{{user.avatar}}" alt="user avatar" class="single-post-avatar-container">
-        </div>
         <div class="meta">
             {{!-- format_plural takes two arguments so we pass 'point' as the first and 'vote_count' as the second --}}
             {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
