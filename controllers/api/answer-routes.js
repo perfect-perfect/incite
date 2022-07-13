@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
                 sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count'
             ]
         ],
+        // 'include' is how we make a 'JOIN' in sequelize
         include: [
             {
                 model: User,

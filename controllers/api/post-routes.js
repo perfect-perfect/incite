@@ -1,32 +1,11 @@
+// import routes
 const router = require('express').Router();
-// Why did we include the 'User' as well?
-//  - in a query to the 'post' table, we would like to retrieve not only information about each post, but also the user that posted it
+// import models
 const { Post, User, Votepost, Answer, Voteanswer } = require('../../models');
-// in order to the upvote route so that when we vote on a post
-//  - we receive the post's updated info
-//  - we have to call on special Sequelize functionality  'sequelize.literal' so we hae to inpirt sequelize here
+// import sequelize
 const sequelize = require('../../config/connection');
+// access to authorization
 const withAuth = require('../../utils/auth');
-
-// post.image.change
-// const cloudinary = require('cloudinary').v2;
-// const { CloudinaryStorage } = require('multer-storage-cloudinary');
-// require ('dotenv').config();
-// const path = require('path');
-// const multer = require('multer');
-
-// cloudinary.config({
-//     cloudinary_url: process.env.CLOUDINARY_URL
-// })
-
-// const storage = new CloudinaryStorage({
-//     cloudinary: cloudinary,
-//     params: {
-//         folder: 'Image',
-//     }
-// });
-
-// const upload = multer({ storage: storage });
 
 // GET all posts /api/posts
 router.get('/', (req, res) => {
@@ -37,14 +16,13 @@ router.get('/', (req, res) => {
             'title', 
             'question', 
             'created_at',
+            // create vote count
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'),'vote_count']
         ],
         // get posts in descending order (newest first)
-        // notice 'order' is a nested array
         order: [[sequelize.literal('`vote_count` DESC')]],
         // 'include' is how we make a 'JOIN' in sequelize
         include: [
-            // include the Answer model
             {
                 model: Answer,
                 attributes: [
@@ -85,6 +63,7 @@ router.get('/:id', (req, res) => {
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'), 'vote_count']
         ],
+        // 'include' is how we make a 'JOIN' in sequelize
         include: [
             {
                 model: Answer,
@@ -105,6 +84,7 @@ router.get('/:id', (req, res) => {
                 model: Answer,
                 include: {
                     model: Voteanswer,
+                    // create answer vote count
                     attributes: [
                         [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE post.id = voteanswer.post_id)'), 'answervote_count']
                     ]
@@ -131,14 +111,10 @@ router.get('/:id', (req, res) => {
 
 // POST a post /api/posts/
 router.post('/', withAuth, (req, res) => {
-    // res.redirect('/dashboard')
-    // expects {title: 'How can I X?', question: 'I am trying to X, but I am having some issues with Y', user_id: 1 }
-    console.log(req.body);
     Post.create({
         title: req.body.title,
         question: req.body.question,
         user_id: req.session.user_id,
-        // image: req.file.path
     })
         .then(dbPostData => {
             res.redirect('/dashboard')
@@ -152,22 +128,14 @@ router.post('/', withAuth, (req, res) => {
 
 // PUT /api/posts/upvote
 // make sure this is before PUT '/:id' or express.js will think the word 'upvote' is a valid parameter for '/:id'
-// Will differ from other PUT requests
-//  - it will have two queries
-//      - uing the 'Votepost' model to create a vote
-//      - querying on that post to get an updated vote count
+// Will differ from other PUT requests, has two queries.
 router.put('/upvote', withAuth, (req, res) => {
-    // make sure the session exists first, before even touching the database
     if (req.session) {
-        // pass session id along with all destructured properties on req.body
-        //  - What are the destructured properties on 'req.body'
-        //      - i believe it is post_id: id from the upvote.js static js file that responds to the clicking of the upvote button
         // 'upvote()' is a custom static method created in models/Post.js
-        // console.log(...req.body)
         Post.upvote(
             { 
+                // destructure properties on req.body
                 ...req.body,
-                // make sit so the upvote feature wil only work if someone has logged in
                 user_id: req.session.user_id 
             }, 
             { 
@@ -208,26 +176,7 @@ router.put('/:id', withAuth, (req, res) => {
         });       
 });
 
-// DELETE a post /api/posts/:id
-// router.delete('/:id', withAuth, (req, res) => {
-//     Post.destroy({
-//         where: {
-//             id: req.params.id
-//         }
-//     })
-//         .then(dbPostData => {
-//             if (!dbPostData) {
-//                 res.status(404).json({ message: 'No post found with this id' });
-//                 return;
-//             }
-//             res.json(dbPostData);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json(err);
-//         });
-// });
-
+// DELETE post /api/posts/:id
 router.delete('/:id', withAuth, (req, res) => {
     Post.destroy({
         where: {

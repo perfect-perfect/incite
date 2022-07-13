@@ -8,8 +8,6 @@ async function answerFormHandler(event) {
         window.location.toString().split('/').length -1
     ];
 
-    // console.log(answer_text, post_id);
-
     if (answer_text) {
         const response = await fetch('/api/answers', {
             method: 'POST',

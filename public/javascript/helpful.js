@@ -4,24 +4,10 @@ async function helpfulClickHandler(event) {
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length -1
     ];
-    // const helpfulButton = document.getElementsByClassName('helpful-btn');
-    // console.log(helpfulButton);
-    // const answer_id = helpfulButton.getAttribute('answer-id');
-
-    // console.log(answer_id)
-    
-
-    // const button = document.querySelector('#helpful-btn');
-
-    // answer_id = button.dataset.answerId
 
     const answer_id = this.dataset.answerId
 
     console.log(answer_id);
-
-    // console.log(this);
-
-    // console.log(button);
 
     const response = await fetch('/api/answers/upvote', {
         method: 'PUT',
@@ -41,10 +27,10 @@ async function helpfulClickHandler(event) {
     }
 }
 
-// document.querySelector('.helpful-btn').addEventListener('click', helpfulClickHandler);
 
+// gets all the helpful buttons and places them in an array
 btns = document.getElementsByClassName('helpful-btn');
-
+// for loop assigns an event listener to every helpful button in the btns array.
 for (var i = 0; i < btns.length; i++) {
     btns[i].addEventListener('click', helpfulClickHandler);
 }

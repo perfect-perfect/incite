@@ -27,7 +27,6 @@ Votepost.init(
                 key: 'id'
             }
         }
-        // What needs to go here?
     },
     {
         sequelize,

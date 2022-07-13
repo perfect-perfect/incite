@@ -15,7 +15,6 @@ class User extends Model {
 User.init(
     {
         // TABLE COLUMN DEFINITIONS GO HERE
-        // define an id column
         id: {
             // use the special Sequelize DataTypes object to provide what type of data it is
             type: DataTypes.INTEGER,
@@ -54,6 +53,7 @@ User.init(
         }
     },
     {
+        // hooks allow us to run functions before and after we create the User object
         hooks: {
             // set up beforeCreate lifecycle 'hook' functionality
             async beforeCreate(newUserData) {

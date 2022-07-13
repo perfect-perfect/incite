@@ -2,14 +2,11 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 // create our Post Model
-// we had to combine 'Votepost.create()' with 'Post.findOne()' in the upvote route. we will use model method instances to replace that messy code
+// model method instances for upvote capability. We can now execute 'Post.upvote()' as if it where one of Sequelize's other built in methods
 class Post extends Model {
-    // we're using 'static' keyword to indicate that the 'upvote' method is one that's based on the 'Post' model
-    // we;ve set it up so that we can now execute 'Post.upvote()' as if it where one of Sequelize's other built in methods
-    //  - we'll pass in the value of 'req.body' (as body) and an object of the models (as 'models') as parameters
     static upvote(body, models) {
-        // almost exactly the same code we implemented into the PUT route
-        // the onlu difference is that we'lre using 'models.Votepost'
+        // we're using 'models.Votepost'
+        // we'll pass in the value of 'req.body' (as body) and an object of the models (as 'models') as parameters
         return models.Votepost.create({
             user_id: body.user_id,
             post_id: body.post_id
@@ -32,7 +29,7 @@ class Post extends Model {
     }
 }
 
-// create fields/columns for Post Model
+// create fields/columns and configuration for Post Model
 Post.init(
     {
         id: {
@@ -51,18 +48,13 @@ Post.init(
         },
         user_id: {
             type: DataTypes.INTEGER,
-            // using the 'references' property, we established a relationship between this post and the user by creating a reference to the 'User' model
+            // established a relationship between this post and the user by creating a reference to the 'User' model
             //  - specifically to the 'id' column that is defined by the 'key' property
             references: {
                 model: 'user',
                 key: 'id'
             }
-        },
-        // post.image.change
-        // image: {
-        //     type: DataTypes.STRING,
-        //     allowNull: true
-        // }
+        }
     },
     {
         sequelize,

@@ -1,11 +1,12 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-
+// extends sequelize 'Model' to the 'Answer' model
 class Answer extends Model {}
 
+// create fields/columns and configuration for Answer Model
 Answer.init(
     {
-        // columns will go here id, answer_text, user_id, and post_id
+        // columns will go here
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,

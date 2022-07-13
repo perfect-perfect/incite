@@ -1,9 +1,3 @@
-// SIGN-UP
-// we will use 'async/await'  to add some error handling
-//  - will help make our promises more readable 
-//  - async here tells us that this function does something asynchronous
-
-
 // LOGIN
 async function loginFormHandler(event){
     event.preventDefault();

@@ -4,7 +4,6 @@ const { Post, User, Answer } = require('../models');
 const withAuth = require('../utils/auth');
 
 // renders the dashboard.handlebars when you go to localhost:3001/dashboard
-// withAuth is middleware that protects the path from user's who are not logged in.
 router.get('/', withAuth, (req, res) => {
     Post.findAll({
         where: {
@@ -40,11 +39,7 @@ router.get('/', withAuth, (req, res) => {
     })
         .then(dbPostData => {
             //serialize data before passing to template
-            // why does it go from 'posts' to 'post'
             const posts = dbPostData.map(post => post.get({ plain: true}));
-
-            console.log(posts)
-
             // we'll hardcode the 'loggedIn' property as 'true' because a user won't be able to get to the dashboard unless they're logged in
             // we pass in posts which is the mapped out results of the 'Post.findAll()'
             res.render('dashboard', { posts, loggedIn: true });
@@ -59,7 +54,6 @@ router.get('/', withAuth, (req, res) => {
 router.get('/edit/:id', withAuth, (req, res) => {
     Post.findOne({
         where: {
-            // this grabs it from the URL i believe
             id: req.params.id
         },
         attributes: [
@@ -102,7 +96,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
             // serialize the data
             const post = dbPostData.get({ plain: true });
 
-            // pass data to template
+            // pass data to edit-post.handlebars
             res.render('edit-post', {
                 post,
                 loggedIn: true
