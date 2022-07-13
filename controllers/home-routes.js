@@ -2,10 +2,8 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Answer, Voteanswer } = require('../models')
 
+// GET all posts for the hompage '/'
 router.get('/', (req, res) => {
-    // console.log the express-session/cookie variables
-    // this console.log shows up in the terminal
-    // console.log(req.session);
     Post.findAll({
         attributes: [
             'id',
@@ -45,23 +43,12 @@ router.get('/', (req, res) => {
         ]
     })
         .then(dbPostData => {
-            // pass a single post object into the homepage template
-            // we are only passing the first post 'dbPostData[0]'
-            // we use '.get()' to seralize the object down to the properties we need
-            // we didn't need to serialize our data before because 'res.json()' did that automatically for us
             // This will loop over and map each Sequelized object into a serialized version of itself
             //  - saving the results in a new 'posts' array
             const posts = dbPostData.map(post => post.get({ plain: true}))
-            // Now we can plug that new posts array into the template
-            //  - although render can accept an array instead of an object
-            //      - that would prevent us from adding other properties to the template later
-            //      - we can simpllu add the array to a object '{ posts }'
-            //          - to loop over this array we'll have to employ handlebars 'helpers' that can loop thorugh arrays on the homepage
-            // we use '.render()' to specify which template we want to use
-            // in this case we want 'homepage.handlebars'
-            console.log(posts);
+            // send new posts array to homepage.handlebars
             res.render('homepage', { 
-                posts ,
+                posts,
                 loggedIn: req.session.loggedIn
             });
         })
@@ -78,7 +65,6 @@ router.get('/login', (req, res) => {
         res.redirect('/');
         return;
     }
-    // our 'login.handlebars' doesn't need any variables so we don't need to pass a second argument to the 'render()' method
     res.render('login');
 });
 
@@ -90,9 +76,8 @@ router.get('/signup', (req, res) =>{
     res.render('signup');
 })
 
-
-// HTTPS request is http://localhost:3001/api/post/{{post.id}}
-// nptice that the api is different, it is 'posts'
+// GET post info for single post page
+// notice that the api is different, it is 'posts'
 router.get('/post/:id', (req, res) => {
     Post.findOne({
         where: {
@@ -105,7 +90,6 @@ router.get('/post/:id', (req, res) => {
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM votepost WHERE post.id = votepost.post_id)'), 'vote_count']
         ],
-        // order: [{model: Post}, {model: Answer}, 'answervote_count', 'desc'],
         include: [
             {
                 model: Answer,
@@ -115,9 +99,7 @@ router.get('/post/:id', (req, res) => {
                     'post_id',
                     'user_id',
                     'created_at',
-                    // [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answers.id = voteanswer.answer_id)'),'answervote_count']
                 ],
-                // order: [[sequelize.literal('`answervote_count` DESC')]],
                 include: {
                     model: User,
                     attributes: [
@@ -131,18 +113,6 @@ router.get('/post/:id', (req, res) => {
                 attributes: [
                     [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answers.id = voteanswer.answer_id)'), 'answervote_count']
                 ]
-                // include: {
-                //     model: Voteanswer,
-                //     attributes: [
-                //         // [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE post.id = voteanswer.post_id)'), 'answervote_count']
-
-                //         // 1st new attempt
-                //         // [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answer.id = voteanswer.answer_id)'), 'answervote_count']
-
-                //         // 2nd attempt
-                //         [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE answers.id = voteanswer.answer_id)'), 'answervote_count']
-                //     ]
-                // }
             },
             {
                 model: User,
@@ -151,13 +121,6 @@ router.get('/post/:id', (req, res) => {
                     'avatar'
                 ]
             },
-            // {
-            //     model: Voteanswer,
-            //     attributes: [
-            //         [sequelize.literal('(SELECT COUNT(*) FROM voteanswer WHERE post.id = voteanswer.post_id)'), 'answervote_count']
-            //     ]
-            // }
-
         ],
         order: [
             [[sequelize.literal('`answers.answervote_count` DESC')]]
@@ -171,7 +134,6 @@ router.get('/post/:id', (req, res) => {
 
             // serialize the data
             const post = dbPostData.get({ plain: true });
-            console.log(post);
             // pass data to template
             res.render('single-post', { 
                 post,

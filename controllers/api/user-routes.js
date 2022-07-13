@@ -1,20 +1,25 @@
 // express.js router
 const router = require('express').Router();
 const { User, Post, Votepost, Answer } = require('../../models');
+// withAuth is middleware that protects the path from user's who are not logged in.
 const withAuth = require('../../utils/auth');
 const sequelize = require('../../config/connection');
 
-
+// import Cloudinary
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 require ('dotenv').config();
+// import path
 const path = require('path');
+// import multer
 const multer = require('multer');
 
+// set up connection to cloudinary
 cloudinary.config({
     cloudinary_url: process.env.CLOUDINARY_URL
 })
 
+// set cloudinary as the storage
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
@@ -22,11 +27,11 @@ const storage = new CloudinaryStorage({
     }
 });
 
+// have multer use the cloudinary storage
 const upload = multer({ storage: storage });
 
-// Get /api/users
+// Get all users /api/users
 router.get('/', (req, res) => {
-    // Access our User model and run .findAll() method
     User.findAll({
         // an object with an array in side, so if we decide to exclude other information we simply add it to the array '[]'
         attributes: { exclude: ['password'] }
@@ -39,7 +44,7 @@ router.get('/', (req, res) => {
 });
 
 
-// GET /api/users/:id
+// GET one user /api/users/:id
 router.get('/:id', (req, res) => {
     User.findOne({
         attributes: { exclude: ['password'] },
@@ -63,7 +68,6 @@ router.get('/:id', (req, res) => {
             },
             // include the titles of all the posts a user has voted on
             {
-                // interesting that we use model: Post here first, and then use the through: Votepost
                 model: Post,
                 attributes: ['title'],
                 through: Votepost,
@@ -85,9 +89,8 @@ router.get('/:id', (req, res) => {
         })
 });
 
-// POST /api/users
+// POST a user /api/users
 router.post('/', (req, res) => {
-    // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     User.create({
         username: req.body.username,
         email: req.body.email,
@@ -110,7 +113,8 @@ router.post('/', (req, res) => {
         });
 });
 
-// POST an avatar image to /api/users/avatar
+// POST an avatar image /api/users/avatar
+// notice we used 'upload.single()' to upload to use multer to upload to cloudinary
 router.post('/avatar', upload.single('avatar'), (req, res) => {
     User.update(
         {
@@ -136,7 +140,6 @@ router.post('/avatar', upload.single('avatar'), (req, res) => {
 })
 
 // POST login /api/users/login
-// POST carries the request in the 'req.body' which is more secure then a GET request which carries it in the parameter (url)
 router.post('/login', (req, res) => {
     // expects {email: 'lernantino@gmail.com', password: 'password1234'}
     // Query the 'User' table for the email entered by the user and assigned it to to req.body.email
@@ -151,13 +154,13 @@ router.post('/login', (req, res) => {
                 return;
             }
 
-            // Verify user
+            // Verify password
             const validPassword = dbUserData.checkPassword(req.body.password);
             if (!validPassword) {
                 res.status(400).json({ message: 'Incorrect password!' });
                 return;
             }
-            // with this authentication working we an finally log in users and then allow them to comment on and upvote posts.
+            // we can finally log in users and then allow them to comment on and upvote posts.
             req.session.save(() => {
                 // declare session variables
                 // creates the express-session/cookie
@@ -174,8 +177,8 @@ router.post('/login', (req, res) => {
 
 // POST logout to /api/users/logout
 router.post('/logout', withAuth, (req, res) => {
-    // use 'destroy()' method to clear the express-session/cookie if we are logged in
     if (req.session.loggedIn) {
+        // use 'destroy()' method to clear the express-session/cookie if we are logged in
         req.session.destroy(() => {
             // send 204 status code after session has successfully ben destroyed
             res.status(204).end();
@@ -186,10 +189,9 @@ router.post('/logout', withAuth, (req, res) => {
     }
 })
 
-// PUT /api/users/1
+// PUT update password /api/users/1
 router.put('/:id', withAuth, (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
-    
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     User.update(req.body, {
         individualHooks: true,
@@ -210,7 +212,7 @@ router.put('/:id', withAuth, (req, res) => {
         })
 });
 
-// DELETE /api/users/1
+// DELETE by :id /api/users/1
 router.delete('/:id', withAuth, (req, res) => {
     User.destroy({
         where: {

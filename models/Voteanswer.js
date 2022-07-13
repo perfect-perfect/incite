@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+// This is a through table
 class Voteanswer extends Model {}
 
 Voteanswer.init(
@@ -18,15 +19,6 @@ Voteanswer.init(
                 key: 'id'
             }
         },
-        // potential solution
-        // post_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        //     references: {
-        //         model: 'post',
-        //         key: 'id'
-        //     }
-        // },
         answer_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
