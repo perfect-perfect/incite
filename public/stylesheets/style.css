@@ -97,7 +97,9 @@ form label {
   width: 100%;
   position: absolute;
   top: 0;
-  background-color: rgba(254, 0, 42, 0.75)
+  background-color: rgba(254, 0, 42, 0.75);
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 
 .nav-right {
@@ -119,6 +121,11 @@ form label {
   margin-right: 10px;
   text-decoration: none;
   color: black
+}
+
+.nav a:hover {
+  color:#d41414;
+  transform: scale(1.5);
 }
 
 .nav-item {
