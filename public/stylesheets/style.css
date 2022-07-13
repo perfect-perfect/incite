@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
 /* BEGIN ENTIRE PROJECT */
 * {
   box-sizing: border-box;
@@ -27,6 +29,8 @@ button {
   background-color: #225ca3;
   border: 0;
   padding: 1%;
+  height: 42px;
+  font-family: "Poppins", sans-serif;
   color: white;
   font-weight: bold;
   transition: background-color .1s;
@@ -102,12 +106,14 @@ form label {
 }
 
 .nav-item button {
+  font-family: "Poppins", sans-serif;
   font-size: 1.25em;
   color: black;
 
 }
 
 .nav a {
+  font-family: "Poppins", sans-serif;
   font-size: 1.25em;
   margin-left: 10px;
   margin-right: 10px;
@@ -357,6 +363,8 @@ main {
 .upvote-btn {
   background-color: #197d0f;
   transition: background-color .1s;
+  width: 100px;
+  height: 42px;
 }
 
 .upvote-btn:hover {
