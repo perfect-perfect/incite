@@ -15,7 +15,8 @@
             <input name="post-title" type="text" class="edit-post-title" value="{{post.title}}" />
         </div>
         <div class = "post-text">
-            <span style="white-space: pre-wrap">{{post.question}}</span>
+            <input name="post-question" type="text" class="edit-post-question" value="{{post.question}}" />
+            {{!-- <span style="white-space: pre-wrap">{{post.question}}</span> --}}
         </div>
         <div>
             {{post.vote_count}} {{format_plural "point" post.vote_count}} by you on {{format_date post.created_at}}
@@ -27,7 +28,7 @@
         <h4>If a question was answered, it can no longer be deleted</h4>
         {{else}}
         <button type="button" class="delete-post-btn">Delete post</button>
-        {{/if}}
+        {{/if}} 
     </form>
 </article>
 {{> answers post.answers}}

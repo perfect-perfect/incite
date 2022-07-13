@@ -9,13 +9,16 @@ async function editFormHandler(event) {
     // capture the value of the 'post-title' form element
     const title = document.querySelector('input[name="post-title"]').value.trim();
 
+    const question = document.querySelector('input[name="post-question"]').value.trim();
+
 
     // PUT request to '/api/posts/${id}'. include the title in the 'body'. stringify the body
-    if (title) {
+    if (title && question) {
         const response = await fetch(`/api/posts/${id}`, {
             method: 'PUT',
             body: JSON.stringify({
-                title
+                title,
+                question
             }),
             headers: {
                 'Content-Type': 'application/json'
