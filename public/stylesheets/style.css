@@ -328,16 +328,17 @@ main {
 }
 
 .edit-page {
-  display: flex;
-  margin: -30px 0px 20px 17px;
+  /* display: flex;
+  margin: -30px 0px 20px 17px; */
 }
 
 .edit-page a {
-  color:#d41414;
+  color:#77a0cc;
+
 }
 
 .edit-page a:hover {
-  color:#fe002a;
+  color:#337CC9;
 }
 
 /* BEGIN SINGLE POST PAGE */

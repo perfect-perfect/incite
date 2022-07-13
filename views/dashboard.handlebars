@@ -53,10 +53,10 @@
     <ol>
         {{#each posts as |post|}}
         <li>
-            {{> post-info post}}
-            <div class="edit-page">
+            {{> post-info-edit post}}
+            {{!-- <div class="edit-page">
                 <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit Question</a>
-            </div>
+            </div> --}}
         </li>
         {{/each}}
     </ol>
