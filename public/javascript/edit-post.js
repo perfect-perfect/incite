@@ -9,7 +9,7 @@ async function editFormHandler(event) {
     // capture the value of the 'post-title' form element
     const title = document.querySelector('input[name="post-title"]').value.trim();
 
-    const question = document.querySelector('input[name="post-question"]').value.trim();
+    const question = document.querySelector('textarea[name="post-question"]').value.trim();
 
 
     // PUT request to '/api/posts/${id}'. include the title in the 'body'. stringify the body
