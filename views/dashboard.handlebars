@@ -1,49 +1,58 @@
-{{#if posts.length}}
-<section class="user-info">
-    <div class="avatar-container">
-        <img src="{{posts.0.user.avatar}}"> 
+
+<div class="styled-container">
+    {{#if posts.length}}
+    <div class="styled-inner-container"> 
+        <section class="user-info">
+            <div class="avatar-container">
+                <img src="{{posts.0.user.avatar}}"> 
+            </div>
+            <div class="welcome-container">
+                <h2>Welcome {{posts.[0].user.username}}!</h2>
+            </div>
+        </section>
+        <section class="avatar-form-container">
+            <form class="avatar-form" method="POST" action="/api/users/avatar" enctype="multipart/form-data">
+                <div>
+                    <label for="avatar"><h2>Update Avatar</h2></label>
+                    <input type="file" name="avatar" accept="image/*">
+                </div>
+                <button type="submit" class="btn">Upload Avatar</button>  
+            </form>
+        </section>
     </div>
-    <div class="welcome-container">
-        <h2>Welcome {{posts.[0].user.username}}!</h2>
+    {{else}}
+    <div>
+        <section class="no-post-header">
+            <h3>Make your first post to unlock all user features!</h3>
+        </section>
     </div>
-</section>
+    {{/if}}
+</div>
 
-<section class="avatar-form-container">
-    <form class="avatar-form" method="POST" action="/api/users/avatar" enctype="multipart/form-data">
-        <div>
-            <label for="avatar"><h2>Update Avatar</h2></label>
-            <input type="file" name="avatar" accept="image/*">
+
+
+<div class="styled-container-ask">
+    <section class="dashboard-form">
+
+
+        <div class="ask-question">
+            <h2>Ask A New Question</h2>
         </div>
-        <button type="submit" class="btn">Upload Avatar</button>  
-    </form>
-</section>
-{{else}}
-<section class="no-post-header">
-    <h3>Make your first post to unlock all user features!</h3>
-</section>
-{{/if}}
 
-<section class="dashboard-form">
+        <form class="new-post-form" method="POST" action="/api/posts">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" />
+            </div>
+            <div>
+                <label for="question">Question:</label>
+                <textarea id="question" name="question"></textarea>
+            </div>
+            <button type="submit" class="create-btn">Create</button>
+        </form>
 
-
-    <div class="ask-question">
-        <h2>Ask A New Question</h2>
-    </div>
-
-    <form class="new-post-form" method="POST" action="/api/posts">
-        <div>
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" />
-        </div>
-        <div>
-            <label for="question">Question:</label>
-            <textarea id="question" name="question"></textarea>
-        </div>
-        <button type="submit" class="create-btn">Create</button>
-    </form>
-
-</section>
-
+    </section>
+</div>
 {{#if posts.length}}
 <section class="dashboard-posts">
     <div class="your-questions">

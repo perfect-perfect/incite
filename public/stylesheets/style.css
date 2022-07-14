@@ -26,7 +26,7 @@ a:hover {
 }
 
 button {
-  background-color: #225ca3;
+  background-color: #0000ff;
   border: 0;
   padding: 1%;
   height: 42px;
@@ -39,13 +39,13 @@ button {
 }
 
 button:hover {
-  background-color: #3486eb;
+  background-color: #0072fe;
 }
 
 textarea, input {
   padding: .5%;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  border-radius: 10px;
+  border: 1px solid #8e0b0b;
 }
 
 textarea:focus, input:focus {
@@ -86,6 +86,8 @@ form label {
 .delete-post-btn:hover {
   background-color: #ff643d;
 }
+
+
 /* END ENTIRE PROJECT */
 
 /* BEGIN HEADER, NAV, AND MAIN */
@@ -93,11 +95,11 @@ form label {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
+  height: 68px;
   width: 100%;
   position: absolute;
   top: 0;
-  background-color: rgba(254, 0, 42, 0.75);
+  background-color: #ffff00;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
@@ -146,10 +148,10 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 350px;
+  height: 500px;
   width: 100%;
   position: relative;
-  background-image: url("../src/hero-img.png");
+  background-image: url("../src/incite-header-3.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -162,7 +164,7 @@ header h1 {
 main {
   flex: 1;
   padding: 2% 4%;
-  background-color: #fff2a1;
+  background-color: #fe4763;
 }
 /* END HEADER, NAV, AND MAIN */
 
@@ -185,8 +187,9 @@ main {
 
 .post {
   margin-bottom: 10px;
-  padding: 7px;
-  background-color: #fff5eb;
+  padding: 50px;
+  background-color: #fdfdd0;
+  border-radius: 66px;
 }
 
 .post-list {
@@ -206,6 +209,29 @@ main {
 /* END HOMEPAGE */
 
 /* BEGIN DASHBOARD */
+.styled-container {
+  background-color: #fe4763;
+  border: 1px solid #8e0b0b;
+  border-radius: 31px;
+  width:fit-content;
+  margin: 10px auto;
+  padding: 73px 0;
+  box-shadow: 10px 5px 5px #441515;
+}
+
+.styled-container-ask {
+  background-color: #fe4763;
+  border: 1px solid #8e0b0b;
+  border-radius: 31px;
+  margin: 70px auto;
+  padding: 34px 0 73px 0;
+  box-shadow: 10px 5px 5px #441515;
+}
+
+.styled-inner-container {
+  justify-content: center;
+}
+
 .avatar-container img {
   height: 250px;
   width: 250px;
@@ -231,13 +257,19 @@ main {
   justify-content: center;
   align-items: center;
 }
+.avatar-form h2 {
+  margin-bottom: 10px;
+  text-decoration: underline;
+  text-decoration-color: #373737;
+  text-decoration-thickness: 3px;
+}
 
 .avatar-form-container {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .avatar-form label {
@@ -245,9 +277,9 @@ main {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  text-decoration: underline;
-  text-decoration-color: #fe002a;
-  text-decoration-thickness: 3px;
+  /* text-decoration: underline; */
+  /* text-decoration-color: #fe002a;
+  text-decoration-thickness: 3px; */
 }
 
 .avatar-form button {
@@ -258,7 +290,7 @@ main {
   align-items: center;
   height: 30px;
   margin-top: 20px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .avatar-from div input {
@@ -277,7 +309,6 @@ main {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 100px;
 }
 
 .ask-question {
@@ -289,13 +320,13 @@ main {
 
 .ask-question h2 {
   text-decoration: underline;
-  text-decoration-color: #fe002a;
+  text-decoration-color: #373737;
   text-decoration-thickness: 3px;
 }
 
 .create-btn {
   width: 100%;
-  height: 30px;
+  margin-top: 20px;
 }
 
 .your-questions {
@@ -307,7 +338,7 @@ main {
 
 .your-questions h2 {
   text-decoration: underline;
-  text-decoration-color: #fe002a;
+  text-decoration-color: #373737;
   text-decoration-thickness: 3px;
 }
 
@@ -324,16 +355,19 @@ main {
 }
 
 .new-post-form {
-  width: 100%;
+  width: 90%;
 }
 
 .new-post-form input {
   width: 100%;
+  /* box-shadow */
+  /* box-shadow: 5px 2px 5px #441515; */
 }
 
 .new-post-form textarea {
   width: 100%;
   height: 400px;
+  /* box-shadow: 5px 2px 5px #441515; */
 }
 
 .edit-post-form {
@@ -368,7 +402,8 @@ main {
 }
 
 .upvote-btn {
-  background-color: #197d0f;
+  /* background-color: #197d0f; */
+  background-color: #12b203;
   transition: background-color .1s;
   width: 100px;
   height: 42px;
@@ -379,7 +414,7 @@ main {
 }
 
 .helpful-btn {
-  background-color: #197d0f;
+  background-color: #12b203;
   transition: background-color .1s;
   margin-top: 10px;
 }
@@ -389,13 +424,15 @@ main {
 }
   
 .answer {
-  padding: 1%;
+  padding: 50px;
+  border-radius: 66px;
   margin-bottom: 1%;
-}
-
-.answer:nth-child(odd) {
   background-color: #fff5eb;
 }
+
+/* .answer:nth-child(odd) {
+  background-color: #fff5eb;
+} */
 
 
 .upvote-btn {
@@ -487,9 +524,28 @@ main {
   justify-content: center;
   align-items: center;
 }
+.styled-container-login {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fe4763;
+  border: 1px solid #8e0b0b;
+  border-radius: 31px;
+  margin: 0px auto 178px auto;
+  padding: 34px 18px 34px;
+  box-shadow: 10px 5px 5px #441515;
+}
 
 .login-form {
+  justify-content: center;
   width: 420px;
+}
+
+.login-form div h2 {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  text-decoration-color: #373737;
+  text-decoration-thickness: 3px;
 }
 
 .login-form div input {
@@ -498,12 +554,25 @@ main {
 
 .login-form button {
   width: 100%;
+  margin-top: 20px;
 }
 
 .login-signup-links {
   display: flex;
   justify-content: center;
+  margin-top: 50px;
+  
 }
+
+.login-signup-links a {
+  color:#ffff00;
+  font-size: 25px;
+}
+
+.login-signup-links a:hover {
+  color:#d4d400;
+}
+
 /* END LOGIN PAGE */
 
 /* BEGIN SIGNUP PAGE */
@@ -516,6 +585,14 @@ main {
 
 .signup-form {
   width: 420px;
+  justify-content: center;
+}
+.signup-form div h2 {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  text-decoration-color: #373737;
+  text-decoration-thickness: 3px;
 }
 
 .signup-form div input {
@@ -524,18 +601,32 @@ main {
 
 .signup-form button { 
   width: 100%;
+  margin-top: 20px;
 }
 
 .signup-login-link {
   display: flex;
   justify-content: center;
+  margin-top: 50px;
+}
+
+.signup-login-link a {
+  color:#ffff00;
+  font-size: 25px;
+}
+
+.signup-login-link a:hover {
+  color:#d4d400;
 }
 /* END SIGNUP PAGE */
 
 /* BEGIN FOOTER */
 footer {
-  border-top: 1px solid #ccc;
-  background-color: #fff2a1;
+  /* border-top: 1px solid #ccc; */
+  font-family: "Poppins", sans-serif;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  background-color: #ffff00;
   display: flex;
   justify-content: center;
   padding: 1%;
