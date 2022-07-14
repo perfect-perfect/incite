@@ -16,13 +16,13 @@ body, html {
 
 a {
   text-decoration:underline;
-  color: #5c9bcf;
+  color: #088fff;
   font-weight: bold;
   transition: color .1s;
 }
 
 a:hover {
-  color: #3486eb;
+  color: #69adff;
 }
 
 button {
@@ -44,7 +44,7 @@ button:hover {
 
 textarea, input {
   padding: .5%;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid #8e0b0b;
 }
 
@@ -116,6 +116,10 @@ form label {
 
 }
 
+.nav-item button:hover {
+  color:#d41414;
+}
+
 .nav a {
   font-family: "Poppins", sans-serif;
   font-size: 1.25em;
@@ -134,6 +138,8 @@ form label {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+
 
 .wrapper {
   width: 100%;
@@ -393,12 +399,12 @@ main {
 }
 
 .edit-page a {
-  color:#77a0cc;
+  color:#088fff;
 
 }
 
 .edit-page a:hover {
-  color:#337CC9;
+  color:#69adff;
 }
 
 /* BEGIN SINGLE POST PAGE */
@@ -456,6 +462,13 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fe4763;
+  border: 1px solid #8e0b0b;
+  border-radius: 31px;
+  margin: 70px auto;
+  padding: 19px 66px 1px 66px;
+  width: 90%;
+  box-shadow: 10px 5px 5px #441515;
   
 }
 
@@ -467,6 +480,8 @@ main {
 
 .answer-question {
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .answer-form textarea {
@@ -475,6 +490,7 @@ main {
 }
 
 .answer-form button {
+  margin-top: 32px;
   width: 100%;
 }
 
@@ -489,7 +505,7 @@ main {
 
 .answer-question h2 {
   text-decoration: underline;
-  text-decoration-color: #fe002a;
+  text-decoration-color: #373737;
   text-decoration-thickness: 3px;
 }
 
@@ -501,6 +517,40 @@ main {
 /* END SINGLE-POST */
 
 /* BEGIN EDIT-POST */
+.back-to-dashboard {
+  display: flex;
+  justify-content: center;
+}
+
+.return-dash {
+  font-size: 25px;
+}
+.styled-container-edit {
+  background-color: #fe4763;
+  border: 1px solid #8e0b0b;
+  border-radius: 31px;
+  margin: 70px auto;
+  padding: 19px 66px 19px 66px;
+  width: 90%;
+  box-shadow: 10px 5px 5px #441515;
+}
+
+.edit-post-form {
+  /* width: 90%; */
+}
+
+.edit-post-form input {
+  width: 100%;
+  /* box-shadow */
+  /* box-shadow: 5px 2px 5px #441515; */
+}
+
+.edit-post-form textarea {
+  width: 100%;
+  height: 400px;
+  /* box-shadow: 5px 2px 5px #441515; */
+}
+
 .edit-post {
   display: flex;
   flex-wrap: wrap;
@@ -510,9 +560,15 @@ main {
 
 .edit-post-header {
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   justify-content: center;
   align-items: center;
+}
+
+.edit-post-header h2 {
+  text-decoration: underline;
+  text-decoration-color: #373737;
+  text-decoration-thickness: 3px;
 }
 
 .edit-post-form input {
@@ -520,11 +576,15 @@ main {
   height: 30px;
 }
 
+.edit-post-question {
+  height: 450px;
+}
+
 .edit-post-form button {
   display: flex;
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 69px;
+  margin-bottom: -43px;
   padding: 10px;
   justify-content: center;
 }
