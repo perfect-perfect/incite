@@ -21,24 +21,15 @@
         </section>
     </div>
     {{else}}
-    <div>
-        <section class="no-post-header">
-            <h3>Make your first post to unlock all user features!</h3>
-        </section>
-    </div>
+    <h3>Make your first post to unlock all user features!</h3>
     {{/if}}
 </div>
 
-
-
 <div class="styled-container-ask">
     <section class="dashboard-form">
-
-
         <div class="ask-question">
             <h2>Ask A New Question</h2>
         </div>
-
         <form class="new-post-form" method="POST" action="/api/posts">
             <div>
                 <label for="title">Title:</label>
@@ -50,15 +41,14 @@
             </div>
             <button type="submit" class="create-btn">Create</button>
         </form>
-
     </section>
 </div>
 {{#if posts.length}}
+
 <section class="dashboard-posts">
     <div class="your-questions">
         <h2>Your Questions</h2>
     </div>
-    
     <ol>
         {{#each posts as |post|}}
         <li>

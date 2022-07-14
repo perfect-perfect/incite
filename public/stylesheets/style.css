@@ -238,6 +238,11 @@ main {
   box-shadow: 10px 5px 5px #441515;
 }
 
+.styled-container h3 {
+  padding: 69px 94px;
+
+}
+
 .styled-container-ask {
   background-color: #fe4763;
   border: 1px solid #8e0b0b;
