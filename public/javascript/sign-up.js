@@ -33,8 +33,11 @@ async function signupFormHandler(event) {
             // document.location.reload();
         } else {
             // if the 'response' is not '.ok' then we 'alert()' the rror
-            alert(response.statusText);
+            console.log(response);
+            alert("Request Failed. Attempt different credentials");
         }
+    } else {
+        alert("Please fill out all fields!")
     }
 }
 

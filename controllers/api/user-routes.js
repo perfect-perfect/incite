@@ -108,7 +108,6 @@ router.post('/', (req, res) => {
             })
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json(err);
         });
 });
@@ -129,7 +128,7 @@ router.post('/avatar', upload.single('avatar'), (req, res) => {
     )
         .then(dbUserData => {
             if (!dbUserData) {
-                res.status(404).json({ message: 'you are here'})
+                res.status(404).json(err)
             }
             res.redirect('/dashboard');
         })

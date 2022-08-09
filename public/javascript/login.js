@@ -20,7 +20,7 @@ async function loginFormHandler(event){
             document.location.reload();
             document.location.replace('/dashboard');
         } else {
-            alert(response.statusText);
+            alert("E-mail or password incorrect!");
         }
     }
 }
