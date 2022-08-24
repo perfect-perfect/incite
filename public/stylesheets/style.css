@@ -6,7 +6,8 @@
 }
 
 
-body, html {
+body,
+html {
   height: 100%;
   padding: 0;
   margin: 0;
@@ -15,7 +16,7 @@ body, html {
 }
 
 a {
-  text-decoration:underline;
+  text-decoration: underline;
   color: #088fff;
   font-weight: bold;
   transition: color .1s;
@@ -42,18 +43,20 @@ button:hover {
   background-color: #0072fe;
 }
 
-textarea, input {
+textarea,
+input {
   padding: .5%;
   border-radius: 5px;
   border: 1px solid #8e0b0b;
 }
 
-textarea:focus, input:focus {
+textarea:focus,
+input:focus {
   outline: none;
   border: 1px solid #3486eb;
 }
 
-form > div {
+form>div {
   margin-bottom: 2%;
 }
 
@@ -117,7 +120,7 @@ form label {
 }
 
 .nav-item button:hover {
-  color:#d41414;
+  color: #d41414;
 }
 
 .nav a {
@@ -130,7 +133,7 @@ form label {
 }
 
 .nav a:hover {
-  color:#d41414;
+  color: #d41414;
   transform: scale(1.5);
 }
 
@@ -172,6 +175,7 @@ main {
   padding: 2% 4%;
   background-color: #fe4763;
 }
+
 /* END HEADER, NAV, AND MAIN */
 
 /* BEGIN HOMEPAGE */
@@ -202,7 +206,7 @@ main {
   margin-bottom: 10px;
   padding: 30px;
   background-color: #fdfdd0;
-  border-radius: 66px;  
+  border-radius: 66px;
 }
 
 .post-list {
@@ -225,6 +229,7 @@ main {
   font-size: 90%;
   color: #7d7d7d;
 }
+
 /* END HOMEPAGE */
 
 /* BEGIN DASHBOARD */
@@ -232,7 +237,7 @@ main {
   background-color: #fe4763;
   border: 1px solid #8e0b0b;
   border-radius: 31px;
-  width:fit-content;
+  width: fit-content;
   margin: 10px auto;
   padding: 73px 0;
   box-shadow: 10px 5px 5px #441515;
@@ -262,6 +267,15 @@ main {
   object-fit: cover;
   border-radius: 50%;
 }
+
+.dash-avatar-container img {
+  height: 75px;
+  width: 75px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
 .user-info {
   display: flex;
   flex-wrap: wrap;
@@ -281,6 +295,7 @@ main {
   justify-content: center;
   align-items: center;
 }
+
 .avatar-form h2 {
   margin-bottom: 10px;
   text-decoration: underline;
@@ -404,12 +419,12 @@ main {
 }
 
 .edit-page a {
-  color:#088fff;
+  color: #088fff;
 
 }
 
 .edit-page a:hover {
-  color:#69adff;
+  color: #69adff;
 }
 
 /* BEGIN SINGLE POST PAGE */
@@ -446,7 +461,7 @@ main {
 .helpful-btn:hover {
   background-color: #1f9c13;
 }
-  
+
 .answer {
   padding: 50px;
   border-radius: 66px;
@@ -474,7 +489,7 @@ main {
   padding: 19px 66px 1px 66px;
   width: 90%;
   box-shadow: 10px 5px 5px #441515;
-  
+
 }
 
 .answer-form {
@@ -519,6 +534,7 @@ main {
   margin-bottom: 10px;
   opacity: .6;
 }
+
 /* END SINGLE-POST */
 
 /* BEGIN EDIT-POST */
@@ -530,6 +546,7 @@ main {
 .return-dash {
   font-size: 25px;
 }
+
 .styled-container-edit {
   background-color: #fe4763;
   border: 1px solid #8e0b0b;
@@ -588,11 +605,12 @@ main {
 .edit-post-form button {
   display: flex;
   width: 100%;
-  margin-top: 69px;
-  margin-bottom: -43px;
+  margin-top: 0px;
+  margin-bottom: 10px;
   padding: 10px;
   justify-content: center;
 }
+
 /* END EDIT-POST */
 
 /* BEGIN LOGIN PAGE */
@@ -602,6 +620,7 @@ main {
   justify-content: center;
   align-items: center;
 }
+
 .styled-container-login {
   display: flex;
   flex-wrap: wrap;
@@ -639,16 +658,16 @@ main {
   display: flex;
   justify-content: center;
   margin-top: 50px;
-  
+
 }
 
 .login-signup-links a {
-  color:#ffff00;
+  color: #ffff00;
   font-size: 25px;
 }
 
 .login-signup-links a:hover {
-  color:#d4d400;
+  color: #d4d400;
 }
 
 /* END LOGIN PAGE */
@@ -661,10 +680,23 @@ main {
   align-items: center;
 }
 
+.styled-container-signup {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fe4763;
+  border: 1px solid #8e0b0b;
+  border-radius: 31px;
+  margin: 0px auto 178px auto;
+  padding: 34px 18px 34px;
+  box-shadow: 10px 5px 5px #441515;
+}
+
+
 .signup-form {
   width: 420px;
   justify-content: center;
 }
+
 .signup-form div h2 {
   display: flex;
   justify-content: center;
@@ -677,7 +709,7 @@ main {
   width: 420px;
 }
 
-.signup-form button { 
+.signup-form button {
   width: 100%;
   margin-top: 20px;
 }
@@ -689,13 +721,14 @@ main {
 }
 
 .signup-login-link a {
-  color:#ffff00;
+  color: #ffff00;
   font-size: 25px;
 }
 
 .signup-login-link a:hover {
-  color:#d4d400;
+  color: #d4d400;
 }
+
 /* END SIGNUP PAGE */
 
 /* BEGIN FOOTER */
@@ -709,5 +742,109 @@ footer {
   justify-content: center;
   padding: 1%;
   font-size: 110%;
+  text-align: center;
 }
+
+
 /* END FOOTER */
+
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+@media screen and (max-width: 980px) {
+  header {
+    background-size: 200%;
+  }
+
+}
+
+@media screen and (max-width: 575px) {
+
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  header {
+    background-size: 300%;
+  }
+
+  /* LOGIN */
+  .login-form {
+    width: 80vw;
+  }
+
+  .login-form div input {
+    width: 80vw;
+  }
+
+  /* SIGN-UP */
+  .signup-form {
+    width: 100%;
+  }
+
+  .signup-form div input {
+    width: 80vw;
+  }
+
+  /* DASHBOARD */
+  .dashboard-posts {
+    width: 100vw;
+    padding-left: -40px
+  }
+
+  .edit-post-ordered-list {
+    /* code goes here */
+    background-color: #fdfdd0;
+    /* width: 130vw; */
+  }
+
+  .dash-avatar-container img {
+    display: none;
+    justify-content: center;
+  }
+
+  /* EDIT POST */
+  .edit-post-form button {
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+
+  .styled-container-edit {
+    padding: 19px 10px;
+  }
+
+  /* SINGLE-QUESTION */
+  .answer-form-container {
+    width: 100vw;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  header {
+    background-size: 500%;
+  }
+
+  .nav a {
+    font-size: 1rem
+  }
+
+  .nav-item {
+    margin: 0;
+  }
+
+  .nav-item button {
+    font-size: 1rem;
+    margin-right: 1rem;
+  }
+
+  .home-avatar-container img {
+    display: none;
+  }
+
+}
