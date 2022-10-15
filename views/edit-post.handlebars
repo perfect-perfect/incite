@@ -16,7 +16,6 @@
             </div>
             <div class = "post-text">
                 <textarea name="post-question" type="text" class="edit-post-question">{{post.question}}</textarea>
-                {{!-- <span style="white-space: pre-wrap">{{post.question}}</span> --}}
             </div>
             <div>
                 {{post.vote_count}} {{format_plural "point" post.vote_count}} by you on {{format_date post.created_at}}

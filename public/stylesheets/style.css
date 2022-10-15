@@ -114,7 +114,7 @@ form label {
 
 .nav-item button {
   font-family: "Poppins", sans-serif;
-  font-size: 1.25em;
+  font-size: 1.25rem;
   color: black;
 
 }
@@ -125,7 +125,7 @@ form label {
 
 .nav a {
   font-family: "Poppins", sans-serif;
-  font-size: 1.25em;
+  font-size: 1.25rem;
   margin-left: 10px;
   margin-right: 10px;
   text-decoration: none;
@@ -134,8 +134,8 @@ form label {
 
 .nav a:hover {
   color: #d41414;
-  transform: scale(1.5);
 }
+
 
 .nav-item {
   margin-left: 10px;
@@ -159,10 +159,8 @@ header {
   align-items: center;
   height: 500px;
   width: 100%;
-  position: relative;
   background-image: url("../src/incite-header-3.png");
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
 }
 
@@ -195,12 +193,7 @@ main {
   margin: 10px;
 }
 
-.post {
-  margin-bottom: 10px;
-  padding: 50px;
-  background-color: #fdfdd0;
-  border-radius: 66px;
-}
+
 
 .post-home {
   margin-bottom: 10px;
@@ -308,7 +301,6 @@ main {
   width: 100%;
   justify-content: center;
   align-items: center;
-  /* margin-bottom: 30px; */
 }
 
 .avatar-form label {
@@ -316,9 +308,6 @@ main {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  /* text-decoration: underline; */
-  /* text-decoration-color: #fe002a;
-  text-decoration-thickness: 3px; */
 }
 
 .avatar-form button {
@@ -329,7 +318,6 @@ main {
   align-items: center;
   height: 30px;
   margin-top: 20px;
-  /* margin-bottom: 10px; */
 }
 
 .avatar-from div input {
@@ -380,6 +368,12 @@ main {
   text-decoration-color: #373737;
   text-decoration-thickness: 3px;
 }
+.post {
+  margin-bottom: 10px;
+  padding: 50px;
+  background-color: #fdfdd0;
+  border-radius: 66px;
+}
 
 .single-post {
   width: 80%;
@@ -399,24 +393,17 @@ main {
 
 .new-post-form input {
   width: 100%;
-  /* box-shadow */
-  /* box-shadow: 5px 2px 5px #441515; */
 }
 
 .new-post-form textarea {
   width: 100%;
   height: 400px;
-  /* box-shadow: 5px 2px 5px #441515; */
 }
 
 .edit-post-form {
   margin-bottom: 5%;
 }
 
-.edit-page {
-  /* display: flex;
-  margin: -30px 0px 20px 17px; */
-}
 
 .edit-page a {
   color: #088fff;
@@ -441,7 +428,6 @@ main {
 }
 
 .upvote-btn {
-  /* background-color: #197d0f; */
   background-color: #12b203;
   transition: background-color .1s;
   width: 100px;

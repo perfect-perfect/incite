@@ -9,7 +9,6 @@ const withAuth = require('../../utils/auth');
 
 // GET all posts /api/posts
 router.get('/', (req, res) => {
-    console.log('==============');
     Post.findAll({
         attributes: [
             'id', 

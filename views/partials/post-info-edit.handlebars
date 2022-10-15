@@ -5,7 +5,7 @@
         </div>
         <div class="post-info-container">
             <div class="title">
-                <a href="/post/{{id}}" target="blank">{{title}}</a>
+                <a href="/post/{{id}}">{{title}}</a>
             </div>
             <div class="meta">
                 {{!-- format_plural takes two arguments so we pass 'point' as the first and 'vote_count' as the second --}}
@@ -13,9 +13,6 @@
                 {{format_date created_at}}
                 |
                 <a href="/post/{{id}}">{{answers.length}} {{format_plural "answer" answers.length}}</a>
-                {{!-- <div class="edit-page">
-                    <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit Question</a>
-                </div> --}}
             </div>
             <div class="edit-page">
                 <a href="/dashboard/edit/{{id}}" class="edit-link">Edit Question</a>
